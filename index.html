@@ -26,7 +26,7 @@
             user-select: none;
         }
 
-        /* Das Interface füllt exakt den Viewport aus, kein Scrollen */
+        /* Das Interface füllt exakt den Viewport aus */
         html, body {
             width: 100%;
             height: 100%;
@@ -36,11 +36,11 @@
         }
 
         body {
-            /* Hintergrund-Verlauf im Frutiger-Stil (heller Schein von rechts oben) */
             background: #1c365a;
             background: -webkit-linear-gradient(135deg, #10213d 0%, #1c365a 50%, #2b5c8f 100%);
             background: linear-gradient(135deg, #10213d 0%, #1c365a 50%, #2b5c8f 100%);
-            padding: 15px;
+            background-attachment: fixed;
+            padding: 20px;
             display: -webkit-box;
             display: flex;
             -webkit-box-align: center;
@@ -49,12 +49,12 @@
             justify-content: center;
         }
 
-        /* DAS STEUERPULT (Natives App-Gehäuse) */
+        /* DAS STEUERPULT (Gehäuse) */
         .control-console {
             width: 100%;
             max-width: 960px;
             height: 100%;
-            max-height: 540px; /* Perfekt für das 16:10 / 16:9 Verhältnis des Tablets */
+            max-height: 540px; /* Perfektes 16:10/16:9 Verhältnis */
             
             background: rgba(255, 255, 255, 0.22);
             background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 100%);
@@ -68,7 +68,8 @@
             -webkit-border-radius: 24px;
             border-radius: 24px;
             
-            padding: 20px;
+            /* Großzügiges, gleichmäßiges Innen-Padding */
+            padding: 25px; 
             
             -webkit-box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.3);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.3);
@@ -89,8 +90,8 @@
             -webkit-box-align: center;
             align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-            padding-bottom: 12px;
-            margin-bottom: 20px;
+            padding-bottom: 15px;
+            margin-bottom: 25px; /* Klarer Abstand nach unten */
         }
 
         .console-title {
@@ -123,35 +124,21 @@
             box-shadow: 0 0 8px #00ff66;
         }
 
-        /* ZWEI-SPALTEN LAYOUT (Wie ein echtes physisches Terminal) */
+        /* INTERFACE GRID (Zwei-Spalten Layout) */
         .console-grid {
             -webkit-box-flex: 1;
             flex: 1;
             display: -webkit-box;
             display: flex;
-            height: calc(100% - 60px);
+            height: calc(100% - 65px);
         }
 
-        /* Linke Spalte: Regler & Knöpfe */
+        /* Linke Spalte: Bedienung */
         .controls-column {
             -webkit-box-flex: 1;
             flex: 1;
-            padding-right: 15px;
+            padding-right: 25px; /* Ausreichend Abstand zur Trennlinie */
             border-right: 1px solid rgba(255, 255, 255, 0.15);
-            display: -webkit-box;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            flex-direction: column;
-            -webkit-box-pack: space-around;
-            justify-content: space-around;
-        }
-
-        /* Rechte Spalte: Das Display */
-        .display-column {
-            -webkit-box-flex: 1;
-            flex: 1;
-            padding-left: 15px;
             display: -webkit-box;
             display: flex;
             -webkit-box-orient: vertical;
@@ -161,8 +148,27 @@
             justify-content: space-between;
         }
 
+        /* Rechte Spalte: Das Display */
+        .display-column {
+            -webkit-box-flex: 1;
+            flex: 1;
+            padding-left: 25px; /* Ausreichend Abstand von Trennlinie */
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+        }
+
+        /* Jede Steuerungseinheit bekommt einen definierten Außenabstand */
         .control-group {
-            margin-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        .control-group:last-child {
+            margin-bottom: 0;
         }
 
         .control-label {
@@ -171,12 +177,16 @@
             font-weight: bold;
             color: #abd8f5;
             text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-            margin-bottom: 6px;
+            margin-bottom: 10px; /* Perfekter Margin zum Steuerelement */
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         /* REGLER (SLIDER) */
+        .slider-container {
+            padding: 5px 0;
+        }
+
         .aero-slider {
             -webkit-appearance: none;
             width: 100%;
@@ -202,11 +212,11 @@
             cursor: pointer;
         }
 
-        /* SELECT-FELD (Dropdown im Aero-Style) */
+        /* SELECT-FELD (Dropdown) */
         .aero-select {
             display: block;
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid rgba(0,0,0,0.3);
             background: rgba(255, 255, 255, 0.85);
             color: #0f172a;
@@ -223,11 +233,11 @@
         .btn-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 10px; /* Definiertes Grid-Spacing */
         }
 
         .aero-btn {
-            padding: 10px;
+            padding: 12px;
             font-size: 12px;
             font-weight: bold;
             color: #ffffff;
@@ -256,13 +266,13 @@
         .btn-rose   { background-color: #ff9ebb; }
         .btn-canary { background-color: #ffe494; color: #3d310d; text-shadow: none; }
 
-        /* RECHTE SPALTE: DAS AKTUELLE DISPLAY (Simuliert ein LCD-Panel) */
+        /* RECHTE SPALTE: DAS LCD PANEL */
         .lcd-screen {
             background: rgba(0, 10, 20, 0.75);
             border: 2px solid rgba(255,255,255,0.2);
             -webkit-border-radius: 12px;
             border-radius: 12px;
-            padding: 15px;
+            padding: 20px;
             -webkit-box-flex: 1;
             flex: 1;
             display: -webkit-box;
@@ -276,15 +286,15 @@
             align-items: center;
             -webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,0.8), 0 0 15px rgba(0, 180, 216, 0.1);
             box-shadow: inset 0 3px 8px rgba(0,0,0,0.8), 0 0 15px rgba(0, 180, 216, 0.1);
-            margin-bottom: 10px;
+            margin-bottom: 20px; /* Genügend Abstand zu den Infokarten */
         }
 
         .lcd-indicator {
-            font-size: 14px;
+            font-size: 13px;
             color: #82d8ff;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .lcd-main-value {
@@ -292,7 +302,7 @@
             font-weight: bold;
             color: #00b4d8;
             text-shadow: 0 0 10px rgba(0, 180, 216, 0.8);
-            margin: 5px 0;
+            margin: 8px 0;
             text-align: center;
         }
 
@@ -306,13 +316,13 @@
         .info-cards {
             display: -webkit-box;
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .mini-card {
             -webkit-box-flex: 1;
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             -webkit-border-radius: 8px;
             border-radius: 8px;
             font-size: 11px;
@@ -326,29 +336,46 @@
         .card-yellow { background: #ffe494; }
         .card-teal   { background: #81ecec; }
 
-        /* WEICHER HOVER-REDUKTIONS-TRICK:
-           Für alte Android-Browser schalten wir Mouse-Hover-Effekte komplett ab, 
-           da diese auf Touch-Geräten oft "kleben" bleiben und rechenintensiv sind. */
-        @media (max-width: 800px) {
+
+        /* RESPONSIVE DESIGN (Speziell angepasst für Portrait/Hochformat) */
+        @media (max-width: 768px) {
+            html, body {
+                /* Im Hochformat schalten wir sanftes Scrollen frei */
+                overflow-y: auto; 
+                height: auto;
+            }
+
+            body {
+                padding: 15px;
+            }
+
+            .control-console {
+                max-height: none;
+                height: auto;
+                padding: 20px;
+            }
+
             .console-grid {
                 -webkit-box-orient: vertical;
                 -webkit-box-direction: normal;
                 flex-direction: column;
-                overflow-y: auto;
+                height: auto;
             }
+
             .controls-column {
                 padding-right: 0;
                 border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.15);
-                padding-bottom: 15px;
-                margin-bottom: 15px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+                padding-bottom: 25px;
+                margin-bottom: 25px; /* Abstand zur unteren Spalte */
             }
+
             .display-column {
                 padding-left: 0;
             }
-            .control-console {
-                max-height: none;
-                height: auto;
+
+            .lcd-screen {
+                padding: 30px 15px; /* Mehr vertikaler Platz auf Handys/Tablets im Hochformat */
             }
         }
     </style>
@@ -358,7 +385,7 @@
     <div class="control-console">
         <!-- Konsolen-Header mit Status-LED -->
         <div class="console-header">
-            <div class="console-title">Aero-System Console v1.4</div>
+            <div class="console-title">Aero-System Console v1.5</div>
             <div class="status-dot-container">
                 <div class="status-dot"></div> System Aktiv
             </div>
@@ -372,7 +399,9 @@
                 <!-- Regler -->
                 <div class="control-group">
                     <label class="control-label" id="slider-text" for="range-slider">Frequenz-Sättigung: 50%</label>
-                    <input type="range" class="aero-slider" id="range-slider" min="10" max="90" value="50" oninput="handleSlider(this.value)">
+                    <div class="slider-container">
+                        <input type="range" class="aero-slider" id="range-slider" min="10" max="90" value="50" oninput="handleSlider(this.value)">
+                    </div>
                 </div>
 
                 <!-- Dropdown -->
@@ -459,7 +488,7 @@
         function handleSlider(val) {
             sliderText.innerHTML = "Frequenz-Sättigung: " + val + "%";
             
-            // Verändert die LCD-Textgröße flüssig (Performanter als CSS Transitionen)
+            // Verändert die LCD-Textgröße flüssig (Performanter als CSS-Transitionen)
             var newSize = 20 + (val / 5);
             outputBox.style.fontSize = newSize + "px";
             subOutput.innerHTML = "Sättigungs-Amplitude angepasst.";
