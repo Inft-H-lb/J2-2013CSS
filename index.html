@@ -2,322 +2,279 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>AeroGlass Showcase (2014 Edition)</title>
-    <!-- Viewport-Einstellung für mobile Browser auf dem Galaxy Tab -->
+    <title>AeroGlass Showcase (Optimized)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <style>
-        /* RESET & GRUNDLAGEN (Kompatibel mit Android 4.4) */
+        /* RESET & ANDROID TAP-HIGHLIGHT FIX */
         * {
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            
+            /* Verhindert die hässlichen weißen/blauen Boxen beim Antippen unter Android KitKat */
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-            /* Klassischer Frutiger-Aero-Hintergrund: Strahlendes Blau mit weichem Verlauf */
-            background: #23a6d5;
-            background: -webkit-linear-gradient(135deg, #0f5195 0%, #23a6d5 50%, #87e0fd 100%);
-            background: linear-gradient(135deg, #0f5195 0%, #23a6d5 50%, #87e0fd 100%);
+            background: #1e3c72;
+            background: -webkit-linear-gradient(135deg, #122544 0%, #1e3c72 40%, #2a69ac 70%, #8ac1f7 100%);
+            background: linear-gradient(135deg, #122544 0%, #1e3c72 40%, #2a69ac 70%, #8ac1f7 100%);
             background-attachment: fixed;
-            color: #1a2a3a;
-            padding: 15px;
+            color: #ffffff;
+            padding: 20px 15px;
             min-height: 100vh;
         }
 
-        /* CONTAINER (Liquid Glass Panel)
-           Verwendet CSS-Gradients statt rechenintensivem Blur für Top-Performance auf altem Mali/Adreno-Grafikchip */
+        /* LIQUID GLASS PANEL (Flach ohne Schachtelung)
+           Optimierter 3D-Glasglanz für ruckelfreies Rendern */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.45);
-            /* Glanz-Reflexion von oben links nach unten rechts */
-            background: -webkit-linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%);
-            background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%);
+            /* Heller, glänzender Verlauf von oben nach unten */
+            background: rgba(255, 255, 255, 0.25);
+            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%);
             
-            /* Weißer Rand oben/links, dunklerer Rand unten/rechts erzeugt 3D-Glastiefe */
-            border-top: 1px solid rgba(255, 255, 255, 0.8);
-            border-left: 1px solid rgba(255, 255, 255, 0.8);
-            border-right: 1px solid rgba(0, 0, 0, 0.15);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            /* Extrem scharfe Lichtkante oben für den flüssigen Glaseffekt */
+            border-top: 2px solid rgba(255, 255, 255, 0.9);
+            border-left: 2px solid rgba(255, 255, 255, 0.6);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             
-            -webkit-border-radius: 16px;
-            border-radius: 16px;
-            
-            padding: 20px;
-            max-width: 800px;
-            margin: 20px auto;
-            
-            /* Einfacher, ressourcenschonender Schatten für alte GPUs */
-            -webkit-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        /* TITEL MIT GLANZ & SCHATTEN */
-        h1 {
-            font-size: 26px;
-            text-align: center;
-            color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 0 10px rgba(255,255,255,0.3);
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        /* SEKTIONS-STYLING */
-        .section {
-            background: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            -webkit-border-radius: 10px;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-
-        .section-title {
-            font-size: 16px;
-            margin-bottom: 12px;
-            color: #0b3c68;
-            border-bottom: 1px solid rgba(11, 60, 104, 0.2);
-            padding-bottom: 5px;
-            font-weight: bold;
-        }
-
-        /* INTERAKTIVE ELEMENTE (AQUA / FRUTIGER BUTTONS) */
-        .button-group {
-            text-align: center;
-        }
-
-        /* Der klassische, skeuomorphe "Glossy"-Button von 2013 */
-        .aero-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 5px;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
-            border: 1px solid rgba(0,0,0,0.2);
             -webkit-border-radius: 20px;
             border-radius: 20px;
-            cursor: pointer;
             
-            /* Trick für den "Glanz"-Streifen in der oberen Hälfte */
-            background: -webkit-linear-gradient(top, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.0) 100%);
-            background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.0) 100%);
+            padding: 30px 20px;
+            max-width: 650px;
+            margin: 20px auto;
             
-            -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 5px rgba(0,0,0,0.2);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 5px rgba(0,0,0,0.2);
-            
-            /* Sehr ressourcenschonender Übergang */
-            -webkit-transition: opacity 0.15s linear;
-            transition: opacity 0.15s linear;
+            -webkit-box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.4);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.4);
         }
 
-        .aero-btn:active {
-            -webkit-transform: translateY(1px);
-            transform: translateY(1px);
-            -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        /* Verschiedene Pastell- & Aero-Farben (Liquid Glass Akzente) */
-        .btn-blue   { background-color: #2980b9; }
-        .btn-green  { background-color: #2ecc71; }
-        .btn-pink   { background-color: #ff85a2; } /* Pastell-Pink */
-        .btn-orange { background-color: #ff9f43; } /* Pastell-Orange */
-
-        /* FORMULAR-ELEMENTE (DROPDOWNS & INPUTS) */
-        .form-control {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(0,0,0,0.2);
-            background: rgba(255, 255, 255, 0.7);
-            color: #1a2a3a;
-            font-size: 14px;
-            -webkit-border-radius: 8px;
-            border-radius: 8px;
-            outline: none;
-            -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        /* SLIDER (REGLER) - Stylings für alte Webkit-Engines */
-        .slider-container {
-            margin: 15px 0;
+        h1 {
+            font-size: 28px;
             text-align: center;
+            color: #ffffff;
+            /* Schlagschatten für die typische Frutiger-Schriftlesbarkeit */
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        /* TEXT-LABEL (Ersetzt die geschachtelten Sektionen) */
+        .control-label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            color: #e0f2fe;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            margin: 20px 0 8px 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* REGLER (SLIDER) - High Performance */
+        .slider-container {
+            margin: 10px 0;
         }
 
         .aero-slider {
             -webkit-appearance: none;
             width: 100%;
-            height: 10px;
-            -webkit-border-radius: 5px;
-            border-radius: 5px;
-            background: rgba(255,255,255,0.5);
+            height: 12px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            background: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(255,255,255,0.15) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(255,255,255,0.15) 100%);
+            border: 1px solid rgba(255,255,255,0.4);
             outline: none;
-            border: 1px solid rgba(0,0,0,0.15);
         }
 
-        /* Regler-Knopf (Skeuomorphisch, wie eine kleine glänzende Perle) */
+        /* Regler-Knopf (Skeuomorphe Glasperle) */
         .aero-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             -webkit-border-radius: 50%;
             border-radius: 50%;
             background: #ffffff;
-            background: -webkit-linear-gradient(top, #ffffff 0%, #cbd5e0 100%);
-            border: 1px solid #999;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            background: -webkit-linear-gradient(top, #ffffff 0%, #d1d5db 40%, #9ca3af 100%);
+            border: 1px solid #777;
+            -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
             cursor: pointer;
         }
 
-        /* LIVE PERFORMANCE TESTER */
-        .interactive-box {
-            background: rgba(255,255,255,0.9);
-            border: 1px solid rgba(0,0,0,0.15);
-            -webkit-border-radius: 8px;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            margin-top: 10px;
-            font-weight: bold;
-            font-size: 18px;
-            /* Standardfarbe */
-            color: #2980b9; 
-            text-shadow: 1px 1px 0px #fff;
-        }
-
-        /* STATISTIK-KARTEN (FLÜSSIGE BREITE) */
-        .stats-grid {
-            display: table;
+        /* DROPDOWN - Edel, sauber, ohne Schachtelung */
+        .aero-select {
+            display: block;
             width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.5);
+            background: rgba(255, 255, 255, 0.85);
+            color: #111827;
+            font-size: 15px;
+            font-weight: 500;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            outline: none;
+            cursor: pointer;
+            -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* BUTTON GROUP & AQUA BUTTONS */
+        .button-row {
+            display: block;
+            text-align: center;
             margin-top: 10px;
         }
 
-        .stats-col {
-            display: table-cell;
-            width: 50%;
-            padding: 5px;
+        .aero-btn {
+            display: inline-block;
+            padding: 12px 22px;
+            margin: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
+            border: 1px solid rgba(0,0,0,0.25);
+            -webkit-border-radius: 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            
+            /* Glanz-Verlauf für den "Water Bubble"-Effekt */
+            background: -webkit-linear-gradient(top, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 48%, rgba(0,0,0,0.15) 52%, rgba(0,0,0,0.0) 100%);
+            background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 48%, rgba(0,0,0,0.15) 52%, rgba(0,0,0,0.0) 100%);
+            
+            -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 3px 6px rgba(0,0,0,0.2);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 3px 6px rgba(0,0,0,0.2);
+            
+            -webkit-transition: opacity 0.1s ease-out;
+            transition: opacity 0.1s ease-out;
         }
 
-        .pastell-card {
-            padding: 10px;
-            -webkit-border-radius: 8px;
-            border-radius: 8px;
+        /* Touch-Feedback (Klick) ohne Performance-Verlust */
+        .aero-btn:active {
+            -webkit-transform: scale(0.97);
+            transform: scale(0.97);
+            opacity: 0.9;
+        }
+
+        /* Frutiger Aero Farben (Pastelle & Aquas) */
+        .btn-aqua   { background-color: #00b4d8; } /* Strahlendes Aqua */
+        .btn-lime   { background-color: #72efdd; color: #0f343a; text-shadow: none; } /* Pastell-Limette */
+        .btn-rose   { background-color: #ff9ebb; } /* Pastell-Rosa */
+        .btn-canary { background-color: #ffe494; color: #3a2e0f; text-shadow: none; } /* Pastell-Gelb */
+
+        /* INTERAKTIVE ANZEIGENBOX */
+        .preview-display {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255,255,255,0.8);
+            -webkit-border-radius: 12px;
+            border-radius: 12px;
+            padding: 18px;
             text-align: center;
-            font-size: 13px;
-            color: #333;
-            border: 1px solid rgba(255,255,255,0.6);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+            margin-top: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #00b4d8;
+            text-shadow: 1px 1px 0px #ffffff;
+            -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Pastellgelb und Pastelltürkis für Abwechslung */
-        .card-yellow { background: #ffeaa7; }
-        .card-teal   { background: #81ecec; }
-
+        /* SEITEN-INFO (Ganz unten, dezent) */
+        .footer-info {
+            text-align: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 20px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
 
-    <!-- Das Haupt-Panel im edlen Frutiger Aero / Liquid Glass-Stil -->
     <div class="glass-panel">
-        
-        <h1>AeroGlass Showcase</h1>
+        <h1>AeroGlass Labs</h1>
 
-        <!-- Sektion 1: Interaktive Knöpfe mit 3D-Glanz -->
-        <div class="section">
-            <div class="section-title">Glossy Buttons (Aero-Farbpalette)</div>
-            <div class="button-group">
-                <div class="aero-btn btn-blue" onclick="changeColor('#2980b9', 'Aero Blau')">Classic Blue</div>
-                <div class="aero-btn btn-green" onclick="changeColor('#2ecc71', 'Frutiger Grün')">Eco Green</div>
-                <div class="aero-btn btn-pink" onclick="changeColor('#ff85a2', 'Pastell Pink')">Soft Pink</div>
-                <div class="aero-btn btn-orange" onclick="changeColor('#ff9f43', 'Pastell Orange')">Sunny Orange</div>
-            </div>
+        <!-- Steuerelement 1: Die schwebenden Aqua- & Pastell-Buttons -->
+        <label class="control-label">Aero Farb-Aktivierung</label>
+        <div class="button-row">
+            <div class="aero-btn btn-aqua" onclick="selectElement('Aqua Blau', '#00b4d8')">Aqua Blue</div>
+            <div class="aero-btn btn-lime" onclick="selectElement('Weiche Limette', '#38b000')">Lime Soda</div>
+            <div class="aero-btn btn-rose" onclick="selectElement('Pastell Rosa', '#ff5c8a')">Rose Glass</div>
+            <div class="aero-btn btn-canary" onclick="selectElement('Zitronen Gelb', '#e6b000')">Sunny Lemon</div>
         </div>
 
-        <!-- Sektion 2: Dropdowns & Auswahllisten -->
-        <div class="section">
-            <div class="section-title">Klassische Controls</div>
-            <select class="form-control" id="glass-selector" onchange="selectGlassStyle()">
-                <option value="clear">Klares Aquaglas (Standard)</option>
-                <option value="frost">Milchglas (Pastell-Hintergrund)</option>
-                <option value="deep">Tiefsee-Blau</option>
-            </select>
+        <!-- Steuerelement 2: Dropdown-Menü -->
+        <label class="control-label" for="style-dropdown">Oberflächen-Struktur</label>
+        <select class="aero-select" id="style-dropdown" onchange="updateStyle(this.value)">
+            <option value="high-gloss">Hoher Glanzgrad (Standard)</option>
+            <option value="semi-matte">Satiniertes Glas (Pastell-Hintergrund)</option>
+            <option value="dark-aqua">Deep Ocean Aqua (Dunkelblau)</option>
+        </select>
+
+        <!-- Steuerelement 3: Regler -->
+        <label class="control-label" id="slider-text" for="range-slider">Glas-Sättigung: 50%</label>
+        <div class="slider-container">
+            <input type="range" class="aero-slider" id="range-slider" min="10" max="90" value="50" oninput="handleSlider(this.value)">
         </div>
 
-        <!-- Sektion 3: Regler (Slider) & Live-Berechnung -->
-        <div class="section">
-            <div class="section-title">Intensitäts-Regler</div>
-            <div class="slider-container">
-                <!-- Einfacher Slider ohne JS-Bibliotheken für maximale Performance -->
-                <input type="range" class="aero-slider" id="intensitySlider" min="0" max="100" value="50" oninput="updateSliderValue(this.value)">
-                <div style="margin-top: 10px; font-size: 13px;" id="slider-label">Regler-Wert: 50%</div>
-            </div>
+        <!-- Live-Ausgabebox -->
+        <div class="preview-display" id="output-box">
+            Auswahl: Aqua Blau
         </div>
-
-        <!-- Sektion 4: Live-Ausgabe (Ändert sich flüssig per JS) -->
-        <div class="section">
-            <div class="section-title">Live-Vorschau</div>
-            <div class="interactive-box" id="preview-box">
-                Aktiviertes Element: Aero Blau
-            </div>
-        </div>
-
-        <!-- Sektion 5: Pastell-Infokarten (CSS-Table für alte Browser statt Flexbox/Grid) -->
-        <div class="stats-grid">
-            <div class="stats-col">
-                <div class="pastell-card card-yellow">
-                    <strong>Gelbes Glas</strong><br>Weiche Pastelltöne
-                </div>
-            </div>
-            <div class="stats-col">
-                <div class="pastell-card card-teal">
-                    <strong>Aqua Türkis</strong><br>Frische Dynamik
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <!-- JAVASCRIPT: Reines ES5 (Kompatibel ab Android 4.0, extrem ressourcensparend) -->
-    <script>
-        var previewBox = document.getElementById('preview-box');
-        var sliderLabel = document.getElementById('slider-label');
+    <div class="footer-info">
+        Optimiert für Android 4.4 &amp; Samsung Galaxy Tab E
+    </div>
 
-        // Funktion zum Wechseln der aktiven Farbe
-        function changeColor(hexColor, name) {
-            previewBox.style.color = hexColor;
-            previewBox.innerHTML = "Aktiviertes Element: " + name;
+    <!-- ES5 JAVASCRIPT (Maximale Performance, kein "Let/Const", kein Ruckeln) -->
+    <script>
+        var outputBox = document.getElementById('output-box');
+        var sliderText = document.getElementById('slider-text');
+        var mainPanel = document.querySelector('.glass-panel');
+
+        // Funktion für Button-Klicks
+        function selectElement(name, hexColor) {
+            outputBox.style.color = hexColor;
+            outputBox.innerHTML = "Auswahl: " + name;
         }
 
-        // Funktion für das Dropdown
-        function selectGlassStyle() {
-            var selector = document.getElementById('glass-selector');
-            var selectedValue = selector.value;
-            
-            var panel = document.querySelector('.glass-panel');
-            
-            if (selectedValue === 'clear') {
-                panel.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)';
-                changeColor('#2980b9', 'Klares Aquaglas');
-            } else if (selectedValue === 'frost') {
-                // Milchglas-Effekt durch höhere Deckkraft simuliert
-                panel.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,245,255,0.8) 100%)';
-                changeColor('#ff85a2', 'Milchglas');
-            } else if (selectedValue === 'deep') {
-                panel.style.background = 'linear-gradient(135deg, rgba(15,81,149,0.8) 0%, rgba(35,166,213,0.6) 100%)';
-                changeColor('#ff9f43', 'Tiefsee-Blau');
+        // Funktion für Dropdown-Wechsel
+        function updateStyle(value) {
+            if (value === 'high-gloss') {
+                mainPanel.style.background = 'linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%)';
+                // Altes Webkit-Fallback
+                mainPanel.style.background = '-webkit-linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%)';
+                selectElement('Hoher Glanzgrad', '#00b4d8');
+            } else if (value === 'semi-matte') {
+                mainPanel.style.background = 'linear-gradient(to bottom, rgba(255, 255, 255, 0.75) 0%, rgba(240, 245, 255, 0.6) 100%)';
+                mainPanel.style.background = '-webkit-linear-gradient(top, rgba(255, 255, 255, 0.75) 0%, rgba(240, 245, 255, 0.6) 100%)';
+                selectElement('Satiniertes Glas', '#ff5c8a');
+            } else if (value === 'dark-aqua') {
+                mainPanel.style.background = 'linear-gradient(to bottom, rgba(0, 180, 216, 0.45) 0%, rgba(18, 37, 68, 0.3) 100%)';
+                mainPanel.style.background = '-webkit-linear-gradient(top, rgba(0, 180, 216, 0.45) 0%, rgba(18, 37, 68, 0.3) 100%)';
+                selectElement('Deep Ocean Aqua', '#ffe494');
             }
         }
 
-        // Funktion für den Live-Slider
-        function updateSliderValue(val) {
-            sliderLabel.innerHTML = "Regler-Wert: " + val + "%";
-            // Ändert die Schriftgröße der Box flüssig ohne Layout-Ruckler
-            previewBox.style.fontSize = (14 + (val / 10)) + "px";
+        // Funktion für den Slider (Regler)
+        function handleSlider(val) {
+            sliderText.innerHTML = "Glas-Sättigung: " + val + "%";
+            
+            // Verändert flüssig die Textgröße der Ausgabebox (Keine rechenintensiven CSS-Transitions nötig)
+            var newSize = 12 + (val / 10);
+            outputBox.style.fontSize = newSize + "px";
         }
     </script>
 </body>
