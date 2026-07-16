@@ -2,12 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Aero Control Console</title>
-    <!-- Optimiert für das Display-Verhältnis des Galaxy Tab E -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <title>Aero Control Console 2013</title>
+    <!-- Der Standard-Viewport von 2013 für mobile Optimierung -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <style>
-        /* APP-RESET: Verhindert jegliche standardmäßige Browser-Markierung */
+        /* 2013 Reset & Box-Sizing (mit allen alten Hersteller-Präfixen) */
         * {
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
@@ -15,160 +15,113 @@
             margin: 0;
             padding: 0;
             
-            /* Aggressiver Schutz gegen weiße/blaue Klick-Boxen auf alten Android-Webkits */
-            -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
-            -webkit-tap-highlight-color: transparent !important;
-            -webkit-focus-ring-color: rgba(0,0,0,0) !important;
-            outline: none !important;
+            /* Schutz vor hässlichen Klick-Rahmen im alten Android-Stock-Browser */
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
             
-            /* Textmarkierung verhindern für echtes App-Feeling */
+            /* Verhindert Textmarkierung beim Tippen auf Buttons */
             -webkit-user-select: none;
+            -moz-user-select: none;
             user-select: none;
         }
 
-        /* Das Interface füllt exakt den Viewport aus */
         html, body {
             width: 100%;
             height: 100%;
-            overflow: hidden;
             background: #10213d;
             font-family: "Segoe UI", Helvetica, Arial, sans-serif;
         }
 
         body {
+            /* 2013-kompatibler Background-Gradient für alte Webkit-Engines */
             background: #1c365a;
+            background: -webkit-gradient(linear, left top, right bottom, from(#10213d), color-stop(50%, #1c365a), to(#2b5c8f));
             background: -webkit-linear-gradient(135deg, #10213d 0%, #1c365a 50%, #2b5c8f 100%);
             background: linear-gradient(135deg, #10213d 0%, #1c365a 50%, #2b5c8f 100%);
             background-attachment: fixed;
-            padding: 20px;
-            display: -webkit-box;
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            justify-content: center;
+            
+            padding: 15px;
+            overflow-y: auto; /* Scrollen erlauben, falls das Tablet im Hochformat ist */
         }
 
-        /* DAS STEUERPULT (Gehäuse) */
+        /* Hilfsklasse für Floats (Der klassische 2013-Clearfix) */
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* DIE HAUPTKONSOLE */
         .control-console {
-            width: 100%;
-            max-width: 960px;
-            height: 100%;
-            max-height: 540px; /* Perfektes 16:10/16:9 Verhältnis */
+            max-width: 900px;
+            margin: 15px auto; /* Zentriert das Interface auf dem Screen */
+            background: rgba(255, 255, 255, 0.20);
             
-            background: rgba(255, 255, 255, 0.22);
-            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 100%);
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 100%);
-            
-            border-top: 2px solid rgba(255, 255, 255, 0.85);
-            border-left: 2px solid rgba(255, 255, 255, 0.6);
+            border-top: 2px solid rgba(255, 255, 255, 0.8);
+            border-left: 2px solid rgba(255, 255, 255, 0.5);
             border-right: 1px solid rgba(255, 255, 255, 0.2);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             
-            -webkit-border-radius: 24px;
-            border-radius: 24px;
+            -webkit-border-radius: 16px;
+            border-radius: 16px;
+            padding: 20px;
             
-            /* Großzügiges, gleichmäßiges Innen-Padding */
-            padding: 25px; 
-            
-            -webkit-box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.3);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.3);
-            
-            display: -webkit-box;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            flex-direction: column;
+            -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
         }
 
-        /* CONSOLE HEADER */
+        /* KONSOLEN-KOPFZEILE */
         .console-header {
-            display: -webkit-box;
-            display: flex;
-            -webkit-box-pack: space-between;
-            justify-content: space-between;
-            -webkit-box-align: center;
-            align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-            padding-bottom: 15px;
-            margin-bottom: 25px; /* Klarer Abstand nach unten */
+            padding-bottom: 12px;
+            margin-bottom: 25px; /* Ordentlicher Margin nach unten */
         }
 
         .console-title {
-            font-size: 20px;
+            float: left;
+            font-size: 18px;
             font-weight: bold;
             color: #ffffff;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            letter-spacing: 1px;
         }
 
         .status-dot-container {
-            display: -webkit-box;
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
+            float: right;
             font-size: 11px;
             color: #b3f5ff;
+            margin-top: 4px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .status-dot {
+            display: inline-block;
             width: 8px;
             height: 8px;
             background-color: #00ff66;
             -webkit-border-radius: 50%;
             border-radius: 50%;
-            margin-right: 8px;
+            margin-right: 5px;
             -webkit-box-shadow: 0 0 8px #00ff66;
             box-shadow: 0 0 8px #00ff66;
+            vertical-align: middle;
         }
 
-        /* INTERFACE GRID (Zwei-Spalten Layout) */
-        .console-grid {
-            -webkit-box-flex: 1;
-            flex: 1;
-            display: -webkit-box;
-            display: flex;
-            height: calc(100% - 65px);
+        /* 2-SPALTEN BINDUNG (BOMBEN-STABIL OHNE FLEXBOX) */
+        .column-left {
+            width: 48%;
+            float: left;
+            margin-right: 4%;
         }
 
-        /* Linke Spalte: Bedienung */
-        .controls-column {
-            -webkit-box-flex: 1;
-            flex: 1;
-            padding-right: 25px; /* Ausreichend Abstand zur Trennlinie */
-            border-right: 1px solid rgba(255, 255, 255, 0.15);
-            display: -webkit-box;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            flex-direction: column;
-            -webkit-box-pack: justify;
-            justify-content: space-between;
+        .column-right {
+            width: 48%;
+            float: left;
         }
 
-        /* Rechte Spalte: Das Display */
-        .display-column {
-            -webkit-box-flex: 1;
-            flex: 1;
-            padding-left: 25px; /* Ausreichend Abstand von Trennlinie */
-            display: -webkit-box;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            flex-direction: column;
-            -webkit-box-pack: justify;
-            justify-content: space-between;
-        }
-
-        /* Jede Steuerungseinheit bekommt einen definierten Außenabstand */
+        /* PRÄZISE ABSTÄNDE FÜR DIE STEUERELEMENTE */
         .control-group {
-            margin-bottom: 20px;
-        }
-
-        .control-group:last-child {
-            margin-bottom: 0;
+            margin-bottom: 22px; /* Genügend Abstand zwischen den Elementen */
         }
 
         .control-label {
@@ -176,13 +129,12 @@
             font-size: 11px;
             font-weight: bold;
             color: #abd8f5;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-            margin-bottom: 10px; /* Perfekter Margin zum Steuerelement */
+            margin-bottom: 8px; /* Abstand zwischen Label und Regler/Button */
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* REGLER (SLIDER) */
+        /* SCHIEBEREGLER (SLIDER) */
         .slider-container {
             padding: 5px 0;
         }
@@ -193,189 +145,157 @@
             height: 10px;
             -webkit-border-radius: 5px;
             border-radius: 5px;
-            background: rgba(0, 0, 0, 0.35);
+            background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            outline: none !important;
+            outline: none;
         }
 
+        /* Der Slider-Knopf - extra groß für kapazitive 2013-Touchscreens */
         .aero-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 22px;
-            height: 22px;
-            -webkit-border-radius: 50%;
-            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            -webkit-border-radius: 12px;
+            border-radius: 12px;
             background: #ffffff;
-            background: -webkit-linear-gradient(top, #ffffff 0%, #cbd5e0 40%, #718096 100%);
+            background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cbd5e0));
+            background: -webkit-linear-gradient(top, #ffffff 0%, #cbd5e0 100%);
+            background: linear-gradient(to bottom, #ffffff 0%, #cbd5e0 100%);
             border: 1px solid #4a5568;
             -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.4);
             box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-            cursor: pointer;
         }
 
-        /* SELECT-FELD (Dropdown) */
+        /* SELECT-DROPDOWN */
         .aero-select {
             display: block;
             width: 100%;
             padding: 12px;
-            border: 1px solid rgba(0,0,0,0.3);
-            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(0,0,0,0.4);
+            background: #ffffff;
             color: #0f172a;
             font-size: 13px;
             font-weight: bold;
             -webkit-border-radius: 8px;
             border-radius: 8px;
-            cursor: pointer;
-            -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
         }
 
-        /* GLOSSY BUTTONS */
-        .btn-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px; /* Definiertes Grid-Spacing */
+        /* BUTTON ROW (Kein CSS Grid!) */
+        .btn-row {
+            margin-bottom: 8px;
+            overflow: hidden; /* Behebt Floats innerhalb der Reihe */
         }
 
         .aero-btn {
-            padding: 12px;
-            font-size: 12px;
+            width: 48%;
+            float: left;
+            padding: 12px 5px;
+            font-size: 11px;
             font-weight: bold;
             color: #ffffff;
             text-align: center;
-            text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
             border: 1px solid rgba(0,0,0,0.3);
-            -webkit-border-radius: 14px;
-            border-radius: 14px;
-            cursor: pointer;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
             
-            background: -webkit-linear-gradient(top, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 48%, rgba(0,0,0,0.15) 52%, rgba(0,0,0,0.0) 100%);
-            background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 48%, rgba(0,0,0,0.15) 52%, rgba(0,0,0,0.0) 100%);
+            /* 2013 Hochglanz-Optik (Glossy) über Linear-Gradients */
+            background: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.45)), color-stop(48%, rgba(255,255,255,0.15)), color-stop(52%, rgba(0,0,0,0.15)), to(rgba(0,0,0,0.0)));
+            background: -webkit-linear-gradient(top, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 48%, rgba(0,0,0,0.15) 52%, rgba(0,0,0,0.0) 100%);
+            background: linear-gradient(to bottom, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 48%, rgba(0,0,0,0.15) 52%, rgba(0,0,0,0.0) 100%);
             
-            -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.2);
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.2);
+            -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,0.5), 0 2px 3px rgba(0,0,0,0.3);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.5), 0 2px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Abstand für den linken Button in jeder Zeile */
+        .aero-btn.btn-left {
+            margin-right: 4%;
         }
 
         .aero-btn:active {
+            opacity: 0.85;
             -webkit-transform: scale(0.96);
             transform: scale(0.96);
-            opacity: 0.9;
         }
 
         .btn-aqua   { background-color: #00b4d8; }
-        .btn-lime   { background-color: #72efdd; color: #0d3831; text-shadow: none; }
-        .btn-rose   { background-color: #ff9ebb; }
-        .btn-canary { background-color: #ffe494; color: #3d310d; text-shadow: none; }
+        .btn-lime   { background-color: #52b788; color: #072213; } /* Etwas satteres Grün für ältere LCDs */
+        .btn-rose   { background-color: #ff9ebb; color: #3d0d1b; }
+        .btn-canary { background-color: #ffe494; color: #3d310d; }
 
-        /* RECHTE SPALTE: DAS LCD PANEL */
+        /* RECHTE SPALTE: DAS LCD DISPLAY */
         .lcd-screen {
-            background: rgba(0, 10, 20, 0.75);
-            border: 2px solid rgba(255,255,255,0.2);
-            -webkit-border-radius: 12px;
-            border-radius: 12px;
-            padding: 20px;
-            -webkit-box-flex: 1;
-            flex: 1;
-            display: -webkit-box;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            flex-direction: column;
-            -webkit-box-pack: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,0.8), 0 0 15px rgba(0, 180, 216, 0.1);
-            box-shadow: inset 0 3px 8px rgba(0,0,0,0.8), 0 0 15px rgba(0, 180, 216, 0.1);
-            margin-bottom: 20px; /* Genügend Abstand zu den Infokarten */
+            background: #000a14; /* Solides Schwarz, falls opacity laggt */
+            border: 2px solid rgba(255,255,255,0.15);
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            padding: 25px 15px;
+            text-align: center;
+            -webkit-box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+            margin-bottom: 22px; /* Luft zu den Status-Karten darunter */
         }
 
         .lcd-indicator {
-            font-size: 13px;
+            font-size: 11px;
             color: #82d8ff;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .lcd-main-value {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             color: #00b4d8;
-            text-shadow: 0 0 10px rgba(0, 180, 216, 0.8);
-            margin: 8px 0;
-            text-align: center;
+            margin: 6px 0;
+            text-shadow: 0 0 8px rgba(0, 180, 216, 0.7);
         }
 
         .lcd-sub-value {
-            font-size: 12px;
+            font-size: 11px;
             color: #ffffff;
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
-        /* PASTELL INFOCARDS */
+        /* ZWEI MINI-CARDS DARUNTER (Floated) */
         .info-cards {
-            display: -webkit-box;
-            display: flex;
-            gap: 12px;
+            width: 100%;
         }
 
         .mini-card {
-            -webkit-box-flex: 1;
-            flex: 1;
-            padding: 12px;
-            -webkit-border-radius: 8px;
-            border-radius: 8px;
+            width: 48%;
+            float: left;
+            padding: 10px 5px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
             font-size: 11px;
             text-align: center;
-            color: #222;
+            color: #222222;
             font-weight: bold;
-            border: 1px solid rgba(255,255,255,0.4);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .mini-card.card-left {
+            margin-right: 4%;
         }
 
         .card-yellow { background: #ffe494; }
         .card-teal   { background: #81ecec; }
 
 
-        /* RESPONSIVE DESIGN (Speziell angepasst für Portrait/Hochformat) */
-        @media (max-width: 768px) {
-            html, body {
-                /* Im Hochformat schalten wir sanftes Scrollen frei */
-                overflow-y: auto; 
-                height: auto;
+        /* RESPONSIVE DESIGN (Für Hochformat-Ausrichtung auf Tablets/Handys) */
+        @media (max-width: 650px) {
+            .column-left, .column-right {
+                width: 100%;
+                float: none;
+                margin-right: 0;
             }
 
-            body {
-                padding: 15px;
-            }
-
-            .control-console {
-                max-height: none;
-                height: auto;
-                padding: 20px;
-            }
-
-            .console-grid {
-                -webkit-box-orient: vertical;
-                -webkit-box-direction: normal;
-                flex-direction: column;
-                height: auto;
-            }
-
-            .controls-column {
-                padding-right: 0;
-                border-right: none;
+            .column-left {
                 border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-                padding-bottom: 25px;
-                margin-bottom: 25px; /* Abstand zur unteren Spalte */
-            }
-
-            .display-column {
-                padding-left: 0;
-            }
-
-            .lcd-screen {
-                padding: 30px 15px; /* Mehr vertikaler Platz auf Handys/Tablets im Hochformat */
+                padding-bottom: 15px;
+                margin-bottom: 25px; /* Großer Margin zur Trennung der Spalten im Hochformat */
             }
         }
     </style>
@@ -383,18 +303,20 @@
 <body>
 
     <div class="control-console">
-        <!-- Konsolen-Header mit Status-LED -->
-        <div class="console-header">
-            <div class="console-title">Aero-System Console v1.5</div>
+        
+        <!-- Header -->
+        <div class="console-header clearfix">
+            <div class="console-title">Aero-System Console v1.7</div>
             <div class="status-dot-container">
                 <div class="status-dot"></div> System Aktiv
             </div>
         </div>
 
-        <div class="console-grid">
+        <!-- Zwei-Spalten-Container -->
+        <div class="console-row clearfix">
             
-            <!-- LINKE SPALTE: BEDIENUNG -->
-            <div class="controls-column">
+            <!-- LINKE SPALTE: REGLER & BUTTONS -->
+            <div class="column-left">
                 
                 <!-- Regler -->
                 <div class="control-group">
@@ -414,21 +336,23 @@
                     </select>
                 </div>
 
-                <!-- Direkt-Tasten -->
+                <!-- Knöpfe -->
                 <div class="control-group">
                     <label class="control-label">Farb-Injektor</label>
-                    <div class="btn-grid">
-                        <div class="aero-btn btn-aqua" onclick="selectElement('Aqua Blau', '#00b4d8')">Aqua</div>
-                        <div class="aero-btn btn-lime" onclick="selectElement('Eco Grün', '#72efdd')">Lime</div>
-                        <div class="aero-btn btn-rose" onclick="selectElement('Soft Pink', '#ff9ebb')">Rose</div>
+                    <div class="btn-row">
+                        <div class="aero-btn btn-left btn-aqua" onclick="selectElement('Aqua Blau', '#00b4d8')">Aqua</div>
+                        <div class="aero-btn btn-lime" onclick="selectElement('Eco Grün', '#52b788')">Lime</div>
+                    </div>
+                    <div class="btn-row" style="margin-bottom: 0;">
+                        <div class="aero-btn btn-left btn-rose" onclick="selectElement('Soft Pink', '#ff9ebb')">Rose</div>
                         <div class="aero-btn btn-canary" onclick="selectElement('Pastell Gelb', '#ffe494')">Lemon</div>
                     </div>
                 </div>
 
             </div>
 
-            <!-- RECHTE SPALTE: AUSGABE (DISPLAY) -->
-            <div class="display-column">
+            <!-- RECHTE SPALTE: DISPLAY -->
+            <div class="column-right">
                 
                 <!-- LCD Panel -->
                 <div class="lcd-screen">
@@ -437,9 +361,9 @@
                     <div class="lcd-sub-value" id="sub-output">Modul bereit // Signal stabil</div>
                 </div>
 
-                <!-- Pastell Statuscards -->
-                <div class="info-cards">
-                    <div class="mini-card card-yellow">
+                <!-- Infocards -->
+                <div class="info-cards clearfix">
+                    <div class="mini-card card-left card-yellow">
                         Kanal A: Aktiv
                     </div>
                     <div class="mini-card card-teal">
@@ -452,46 +376,36 @@
         </div>
     </div>
 
-    <!-- ES5 JAVASCRIPT (Maximale Performance auf altem KitKat-Tablet) -->
+    <!-- PURES ES5 JAVASCRIPT (Lauft auf Android 4 Browsern perfekt stabil) -->
     <script>
         var outputBox = document.getElementById('output-box');
         var subOutput = document.getElementById('sub-output');
         var sliderText = document.getElementById('slider-text');
         var mainConsole = document.querySelector('.control-console');
 
-        // Farb-Aktivierung über Buttons
         function selectElement(name, hexColor) {
             outputBox.style.color = hexColor;
-            outputBox.style.textShadow = "0 0 10px " + hexColor;
             outputBox.innerHTML = name;
-            subOutput.innerHTML = "Injektor-Signal kalibriert auf: " + hexColor;
+            subOutput.innerHTML = "Signal kalibriert auf: " + hexColor;
         }
 
-        // Moduswechsel über Dropdown
         function updateStyle(value) {
             if (value === 'high-gloss') {
-                mainConsole.style.background = 'linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 100%)';
-                mainConsole.style.background = '-webkit-linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 100%)';
+                mainConsole.style.background = 'rgba(255, 255, 255, 0.20)';
                 selectElement('Aqua Blau', '#00b4d8');
             } else if (value === 'semi-matte') {
-                mainConsole.style.background = 'linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%, rgba(230, 245, 255, 0.4) 100%)';
-                mainConsole.style.background = '-webkit-linear-gradient(top, rgba(255, 255, 255, 0.6) 0%, rgba(230, 245, 255, 0.4) 100%)';
-                selectElement('Eco Grün', '#72efdd');
+                mainConsole.style.background = 'rgba(230, 245, 255, 0.45)';
+                selectElement('Eco Grün', '#52b788');
             } else if (value === 'dark-aqua') {
-                mainConsole.style.background = 'linear-gradient(to bottom, rgba(0, 180, 216, 0.35) 0%, rgba(16, 33, 61, 0.25) 100%)';
-                mainConsole.style.background = '-webkit-linear-gradient(top, rgba(0, 180, 216, 0.35) 0%, rgba(16, 33, 61, 0.25) 100%)';
+                mainConsole.style.background = 'rgba(16, 33, 61, 0.75)';
                 selectElement('Tiefsee Sonar', '#ffe494');
             }
         }
 
-        // Slider-Wert verändern
         function handleSlider(val) {
             sliderText.innerHTML = "Frequenz-Sättigung: " + val + "%";
-            
-            // Verändert die LCD-Textgröße flüssig (Performanter als CSS-Transitionen)
-            var newSize = 20 + (val / 5);
+            var newSize = 18 + (val / 6);
             outputBox.style.fontSize = newSize + "px";
-            subOutput.innerHTML = "Sättigungs-Amplitude angepasst.";
         }
     </script>
 </body>
