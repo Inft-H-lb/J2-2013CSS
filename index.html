@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AeroSphere - Frutiger Aero Portal</title>
+    <meta charset="utf-8">
+    <title>AeroGlass Showcase (2014 Edition)</title>
+    <!-- Viewport-Einstellung für mobile Browser auf dem Galaxy Tab -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <style>
-        /* --- RESET & BASIC STYLES --- */
+        /* RESET & GRUNDLAGEN (Kompatibel mit Android 4.4) */
         * {
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
@@ -15,476 +17,308 @@
         }
 
         body {
-            font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
-            color: #1e3d59;
-            /* Ein klassischer Frutiger Aero Hintergrund: Blau-Grüner Verlauf mit simulierter 'Aurora' */
-            background: #1785a5;
-            background: -webkit-linear-gradient(135deg, #0d4b75 0%, #1785a5 40%, #5cb85c 100%);
-            background: -moz-linear-gradient(135deg, #0d4b75 0%, #1785a5 40%, #5cb85c 100%);
-            background: -o-linear-gradient(135deg, #0d4b75 0%, #1785a5 40%, #5cb85c 100%);
-            background: linear-gradient(135deg, #0d4b75 0%, #1785a5 40%, #5cb85c 100%);
+            font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+            /* Klassischer Frutiger-Aero-Hintergrund: Strahlendes Blau mit weichem Verlauf */
+            background: #23a6d5;
+            background: -webkit-linear-gradient(135deg, #0f5195 0%, #23a6d5 50%, #87e0fd 100%);
+            background: linear-gradient(135deg, #0f5195 0%, #23a6d5 50%, #87e0fd 100%);
             background-attachment: fixed;
+            color: #1a2a3a;
+            padding: 15px;
             min-height: 100vh;
+        }
+
+        /* CONTAINER (Liquid Glass Panel)
+           Verwendet CSS-Gradients statt rechenintensivem Blur für Top-Performance auf altem Mali/Adreno-Grafikchip */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.45);
+            /* Glanz-Reflexion von oben links nach unten rechts */
+            background: -webkit-linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%);
+            background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%);
+            
+            /* Weißer Rand oben/links, dunklerer Rand unten/rechts erzeugt 3D-Glastiefe */
+            border-top: 1px solid rgba(255, 255, 255, 0.8);
+            border-left: 1px solid rgba(255, 255, 255, 0.8);
+            border-right: 1px solid rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            
+            -webkit-border-radius: 16px;
+            border-radius: 16px;
+            
             padding: 20px;
-            line-height: 1.4;
+            max-width: 800px;
+            margin: 20px auto;
+            
+            /* Einfacher, ressourcenschonender Schatten für alte GPUs */
+            -webkit-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
-        /* --- WRAPPER (RESPONSIVE) --- */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        /* --- THE GLOSSY HEADER --- */
-        header {
-            /* Simuliertes 'Liquid Glass' durch harte Verlaufs-Kanten (Glossy Highlight) */
-            background: #ffffff;
-            background: -webkit-linear-gradient(top, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 50%, rgba(240,240,240,0.15) 51%, rgba(255,255,255,0.25) 100%);
-            background: -moz-linear-gradient(top, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 50%, rgba(240,240,240,0.15) 51%, rgba(255,255,255,0.25) 100%);
-            background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 50%, rgba(240,240,240,0.15) 51%, rgba(255,255,255,0.25) 100%);
-            
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-            border-radius: 15px;
-            
-            -webkit-box-shadow: 0 8px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.8);
-            -moz-box-shadow: 0 8px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.8);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.8);
-            
-            padding: 25px;
-            margin-bottom: 20px;
+        /* TITEL MIT GLANZ & SCHATTEN */
+        h1 {
+            font-size: 26px;
             text-align: center;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-        }
-
-        header h1 {
-            font-size: 2.2em;
-            color: #0d4b75;
-            letter-spacing: 1px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 0 10px rgba(255,255,255,0.3);
+            margin-bottom: 20px;
             font-weight: bold;
         }
 
-        header p {
-            font-size: 1em;
-            color: #1b557a;
-            margin-top: 5px;
-            font-style: italic;
-        }
-
-        /* --- TWO COLUMN RESPONSIVE LAYOUT (2013 Float Fallback) --- */
-        .content-area {
-            width: 100%;
-        }
-
-        .main-panel {
-            width: 68%;
-            float: left;
-            margin-right: 2%;
-        }
-
-        .sidebar {
-            width: 30%;
-            float: left;
-        }
-
-        /* Clearfix für die Floats */
-        .clearfix:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        /* --- THE GLASS PANELS --- */
-        .panel {
-            background: rgba(255, 255, 255, 0.25);
+        /* SEKTIONS-STYLING */
+        .section {
+            background: rgba(255, 255, 255, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.5);
-            -webkit-border-radius: 12px;
-            -moz-border-radius: 12px;
-            border-radius: 12px;
-            -webkit-box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15), inset 0 10px 20px rgba(255, 255, 255, 0.3);
-            -moz-box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15), inset 0 10px 20px rgba(255, 255, 255, 0.3);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15), inset 0 10px 20px rgba(255, 255, 255, 0.3);
-            padding: 20px;
-            margin-bottom: 20px;
-            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
-        }
-
-        .panel h2 {
-            font-size: 1.4em;
-            color: #03395c;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-            padding-bottom: 8px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            padding: 15px;
             margin-bottom: 15px;
         }
 
-        /* --- WIDGETS & FORM ELEMENTS --- */
-        .widget-group {
-            margin-bottom: 18px;
-        }
-
-        label {
-            display: block;
+        .section-title {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #0b3c68;
+            border-bottom: 1px solid rgba(11, 60, 104, 0.2);
+            padding-bottom: 5px;
             font-weight: bold;
-            margin-bottom: 6px;
-            color: #03395c;
-            font-size: 0.95em;
         }
 
-        /* 2013 Glossy Button */
+        /* INTERAKTIVE ELEMENTE (AQUA / FRUTIGER BUTTONS) */
+        .button-group {
+            text-align: center;
+        }
+
+        /* Der klassische, skeuomorphe "Glossy"-Button von 2013 */
         .aero-btn {
             display: inline-block;
             padding: 10px 20px;
-            font-size: 14px;
+            margin: 5px;
             font-weight: bold;
-            color: #ffffff;
-            text-decoration: none;
-            text-align: center;
-            text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
-            border: 1px solid #105a8f;
-            -webkit-border-radius: 30px; /* Schön abgerundet, typisch Frutiger */
-            -moz-border-radius: 30px;
-            border-radius: 30px;
-            
-            /* Sattes Aqua-Blau mit extremem Glossy-Effekt */
-            background: #25a6df;
-            background: -webkit-linear-gradient(top, #52ccff 0%, #25a6df 49%, #0088cc 50%, #00a2e8 100%);
-            background: -moz-linear-gradient(top, #52ccff 0%, #25a6df 49%, #0088cc 50%, #00a2e8 100%);
-            background: linear-gradient(to bottom, #52ccff 0%, #25a6df 49%, #0088cc 50%, #00a2e8 100%);
-            
-            -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4);
-            -moz-box-shadow: 0 4px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4);
+            color: #fff;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+            border: 1px solid rgba(0,0,0,0.2);
+            -webkit-border-radius: 20px;
+            border-radius: 20px;
             cursor: pointer;
-            outline: none;
-            -webkit-transition: all 0.1s ease-in-out;
-            -moz-transition: all 0.1s ease-in-out;
-            transition: all 0.1s ease-in-out;
-        }
-
-        .aero-btn:hover {
-            background: #39b3eb;
-            background: -webkit-linear-gradient(top, #6bd3ff 0%, #39b3eb 49%, #0099e6 50%, #14b5ff 100%);
-            background: -moz-linear-gradient(top, #6bd3ff 0%, #39b3eb 49%, #0099e6 50%, #14b5ff 100%);
-            background: linear-gradient(to bottom, #6bd3ff 0%, #39b3eb 49%, #0099e6 50%, #14b5ff 100%);
-            -webkit-box-shadow: 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.6);
-            -moz-box-shadow: 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.6);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.6);
+            
+            /* Trick für den "Glanz"-Streifen in der oberen Hälfte */
+            background: -webkit-linear-gradient(top, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.0) 100%);
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.0) 100%);
+            
+            -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 5px rgba(0,0,0,0.2);
+            
+            /* Sehr ressourcenschonender Übergang */
+            -webkit-transition: opacity 0.15s linear;
+            transition: opacity 0.15s linear;
         }
 
         .aero-btn:active {
-            background: #0088cc;
-            -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.4);
-            -moz-box-shadow: inset 0 3px 5px rgba(0,0,0,0.4);
-            box-shadow: inset 0 3px 5px rgba(0,0,0,0.4);
+            -webkit-transform: translateY(1px);
+            transform: translateY(1px);
+            -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* Grüner Akzent-Button */
-        .aero-btn.green {
-            border-color: #3b822c;
-            background: #62c443;
-            background: -webkit-linear-gradient(top, #8ae06c 0%, #62c443 49%, #3d9c1e 50%, #4cb82b 100%);
-            background: -moz-linear-gradient(top, #8ae06c 0%, #62c443 49%, #3d9c1e 50%, #4cb82b 100%);
-            background: linear-gradient(to bottom, #8ae06c 0%, #62c443 49%, #3d9c1e 50%, #4cb82b 100%);
-        }
+        /* Verschiedene Pastell- & Aero-Farben (Liquid Glass Akzente) */
+        .btn-blue   { background-color: #2980b9; }
+        .btn-green  { background-color: #2ecc71; }
+        .btn-pink   { background-color: #ff85a2; } /* Pastell-Pink */
+        .btn-orange { background-color: #ff9f43; } /* Pastell-Orange */
 
-        /* Aero-Dropdown (Select) */
-        .aero-select {
+        /* FORMULAR-ELEMENTE (DROPDOWNS & INPUTS) */
+        .form-control {
+            display: block;
             width: 100%;
-            padding: 8px 12px;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.7);
+            color: #1a2a3a;
             font-size: 14px;
-            color: #1e3d59;
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(0, 136, 204, 0.5);
             -webkit-border-radius: 8px;
-            -moz-border-radius: 8px;
             border-radius: 8px;
-            -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-            -moz-box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
             outline: none;
+            -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
 
-        /* Aero-Regler (Slider / Range) */
-        .aero-range {
+        /* SLIDER (REGLER) - Stylings für alte Webkit-Engines */
+        .slider-container {
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .aero-slider {
             -webkit-appearance: none;
             width: 100%;
-            margin: 10px 0;
-            background: rgba(255, 255, 255, 0.5);
-            height: 8px;
+            height: 10px;
             -webkit-border-radius: 5px;
             border-radius: 5px;
+            background: rgba(255,255,255,0.5);
             outline: none;
-            border: 1px solid rgba(0, 136, 204, 0.3);
+            border: 1px solid rgba(0,0,0,0.15);
         }
 
-        /* Slider Thumb Styling für ältere Webkit/Blink Browser (iPad / Android Tablets) */
-        .aero-range::-webkit-slider-thumb {
+        /* Regler-Knopf (Skeuomorphisch, wie eine kleine glänzende Perle) */
+        .aero-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             -webkit-border-radius: 50%;
             border-radius: 50%;
-            background: #25a6df;
-            background: -webkit-linear-gradient(top, #ffffff 0%, #a6e3ff 40%, #0088cc 100%);
-            border: 1.5px solid #005f8c;
+            background: #ffffff;
+            background: -webkit-linear-gradient(top, #ffffff 0%, #cbd5e0 100%);
+            border: 1px solid #999;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
             cursor: pointer;
-            -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        .aero-range::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: -moz-linear-gradient(top, #ffffff 0%, #a6e3ff 40%, #0088cc 100%);
-            border: 1.5px solid #005f8c;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        /* LIVE PERFORMANCE TESTER */
+        .interactive-box {
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(0,0,0,0.15);
+            -webkit-border-radius: 8px;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            /* Standardfarbe */
+            color: #2980b9; 
+            text-shadow: 1px 1px 0px #fff;
         }
 
-        /* --- TEST WIDGETS --- */
-        /* Fortschrittsbalken (Progress Bar) */
-        .progress-container {
+        /* STATISTIK-KARTEN (FLÜSSIGE BREITE) */
+        .stats-grid {
+            display: table;
             width: 100%;
-            height: 22px;
-            background: rgba(0, 0, 0, 0.15);
-            -webkit-border-radius: 12px;
-            -moz-border-radius: 12px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            -webkit-box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
-            -moz-box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+            margin-top: 10px;
         }
 
-        .progress-bar {
-            height: 100%;
-            width: 45%; /* Dynamisch per JS */
-            background: #5cb85c;
-            /* Ein extrem saftiges "Eco-Green" mit horizontalem Glas-Shine */
-            background: -webkit-linear-gradient(top, #a2f279 0%, #62c443 40%, #2f8c14 50%, #47a825 100%);
-            background: -moz-linear-gradient(top, #a2f279 0%, #62c443 40%, #2f8c14 50%, #47a825 100%);
-            background: linear-gradient(to bottom, #a2f279 0%, #62c443 40%, #2f8c14 50%, #47a825 100%);
-            -webkit-border-radius: 12px;
-            border-radius: 12px;
-            -webkit-transition: width 0.3s ease;
-            -moz-transition: width 0.3s ease;
-            transition: width 0.3s ease;
+        .stats-col {
+            display: table-cell;
+            width: 50%;
+            padding: 5px;
         }
 
-        /* Interaktives Infofeld */
-        .info-bubble {
-            background: rgba(255, 255, 255, 0.4);
-            border-left: 5px solid #0088cc;
-            padding: 12px;
-            -webkit-border-radius: 0 8px 8px 0;
-            -moz-border-radius: 0 8px 8px 0;
-            border-radius: 0 8px 8px 0;
-            margin-top: 15px;
-            font-size: 0.9em;
+        .pastell-card {
+            padding: 10px;
+            -webkit-border-radius: 8px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            color: #333;
+            border: 1px solid rgba(255,255,255,0.6);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
         }
 
-        /* --- RESPONSIVELAYOUT FOR TABLETS & PHONES (2013-safe Media Queries) --- */
-        @media (max-width: 768px) {
-            .main-panel, .sidebar {
-                width: 100%;
-                float: none;
-                margin-right: 0;
-            }
-            body {
-                padding: 10px;
-            }
-            header h1 {
-                font-size: 1.8em;
-            }
-        }
+        /* Pastellgelb und Pastelltürkis für Abwechslung */
+        .card-yellow { background: #ffeaa7; }
+        .card-teal   { background: #81ecec; }
+
     </style>
 </head>
 <body>
 
-<div class="container">
-
-    <!-- HEADER WITH GLASS SHINE -->
-    <header>
-        <h1>AeroSphere Portal</h1>
-        <p>Erlebe das Liquid-Glass-Feeling von 2013 direkt auf deinem Gerät</p>
-    </header>
-
-    <!-- TWO-COLUMN RESPONSIVE LAYOUT -->
-    <div class="content-area clearfix">
+    <!-- Das Haupt-Panel im edlen Frutiger Aero / Liquid Glass-Stil -->
+    <div class="glass-panel">
         
-        <!-- MAIN PANEL -->
-        <div class="main-panel">
-            <div class="panel">
-                <h2>Interaktive Aero-Widgets</h2>
-                
-                <!-- REGEL & PROGRESSBAR WIDGET -->
-                <div class="widget-group">
-                    <label for="fluid-slider">Flüssigkeits-Pegel: <span id="slider-val">45</span>%</label>
-                    <input type="range" id="fluid-slider" class="aero-range" min="0" max="100" value="45">
-                    
-                    <div style="margin-top: 10px;">
-                        <label>Öko-Energie-Status:</label>
-                        <div class="progress-container">
-                            <div class="progress-bar" id="energy-bar"></div>
-                        </div>
-                    </div>
-                </div>
+        <h1>AeroGlass Showcase</h1>
 
-                <!-- DROPDOWN SELECT WIDGET -->
-                <div class="widget-group">
-                    <label for="theme-select">Farbschema anpassen (Vorschau-Modus):</label>
-                    <select id="theme-select" class="aero-select">
-                        <option value="sky">Aqua Sky Blue (Standard)</option>
-                        <option value="eco">Eco Green Aurora</option>
-                        <option value="deep">Deep Ocean Abyss</option>
-                    </select>
-                </div>
-
-                <!-- BUTTON WIDGETS -->
-                <div class="widget-group" style="padding-top: 10px;">
-                    <label>Aero-Aktionen auslösen:</label>
-                    <button class="aero-btn" id="btn-water">Klick für Wasser-Sound</button>
-                    <button class="aero-btn green" id="btn-bubble">Blase erzeugen</button>
-                </div>
-
-                <!-- INFO ANZEIGE -->
-                <div class="info-bubble" id="status-display">
-                    <strong>Status:</strong> System bereit. Bewege die Regler, um den alten Prozessor zu fordern!
-                </div>
-            </div>
-
-            <div class="panel">
-                <h2>Was macht den Frutiger Aero Stil aus?</h2>
-                <p style="margin-bottom: 10px;">
-                    Dieser Stil dominierte die Benutzeroberflächen von Windows Vista, Windows 7 und frühen iOS-Versionen. Typische Merkmale sind:
-                </p>
-                <ul style="margin-left: 20px; padding-left: 5px;">
-                    <li><strong>Skeuomorphismus:</strong> Digitale Knöpfe sehen aus wie echte, glänzende Plastik- oder Glasknöpfe.</li>
-                    <li><strong>Naturmotive:</strong> Kombination von moderner Hochtechnologie mit frischem Wasser, grünen Wiesen und blauem Himmel.</li>
-                    <li><strong>Glossy-Effekt:</strong> Ein simulierter Lichtreflex, der Objekten eine fühlbare Tiefe verleiht.</li>
-                </ul>
+        <!-- Sektion 1: Interaktive Knöpfe mit 3D-Glanz -->
+        <div class="section">
+            <div class="section-title">Glossy Buttons (Aero-Farbpalette)</div>
+            <div class="button-group">
+                <div class="aero-btn btn-blue" onclick="changeColor('#2980b9', 'Aero Blau')">Classic Blue</div>
+                <div class="aero-btn btn-green" onclick="changeColor('#2ecc71', 'Frutiger Grün')">Eco Green</div>
+                <div class="aero-btn btn-pink" onclick="changeColor('#ff85a2', 'Pastell Pink')">Soft Pink</div>
+                <div class="aero-btn btn-orange" onclick="changeColor('#ff9f43', 'Pastell Orange')">Sunny Orange</div>
             </div>
         </div>
 
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-            <div class="panel">
-                <h2>System-Info</h2>
-                <p><strong>Kompatibilität:</strong> Optimiert für Browser-Engines um das Jahr 2013.</p>
-                <p style="margin-top: 10px;"><strong>Technologie:</strong></p>
-                <ul style="margin-left: 15px; margin-top: 5px; font-size: 0.9em;">
-                    <li>CSS 2.1 & Early CSS3</li>
-                    <li>Kein CSS Grid / Flexbox</li>
-                    <li>Vanilla JavaScript (ES5)</li>
-                    <li>Keine externen Web-Fonts</li>
-                </ul>
-            </div>
+        <!-- Sektion 2: Dropdowns & Auswahllisten -->
+        <div class="section">
+            <div class="section-title">Klassische Controls</div>
+            <select class="form-control" id="glass-selector" onchange="selectGlassStyle()">
+                <option value="clear">Klares Aquaglas (Standard)</option>
+                <option value="frost">Milchglas (Pastell-Hintergrund)</option>
+                <option value="deep">Tiefsee-Blau</option>
+            </select>
+        </div>
 
-            <div class="panel" style="text-align: center;">
-                <h2>Aero Uhr</h2>
-                <div id="clock" style="font-size: 1.8em; font-weight: bold; color: #03395c; text-shadow: 0 1px 3px rgba(255,255,255,0.8); margin: 10px 0;">
-                    12:00:00
+        <!-- Sektion 3: Regler (Slider) & Live-Berechnung -->
+        <div class="section">
+            <div class="section-title">Intensitäts-Regler</div>
+            <div class="slider-container">
+                <!-- Einfacher Slider ohne JS-Bibliotheken für maximale Performance -->
+                <input type="range" class="aero-slider" id="intensitySlider" min="0" max="100" value="50" oninput="updateSliderValue(this.value)">
+                <div style="margin-top: 10px; font-size: 13px;" id="slider-label">Regler-Wert: 50%</div>
+            </div>
+        </div>
+
+        <!-- Sektion 4: Live-Ausgabe (Ändert sich flüssig per JS) -->
+        <div class="section">
+            <div class="section-title">Live-Vorschau</div>
+            <div class="interactive-box" id="preview-box">
+                Aktiviertes Element: Aero Blau
+            </div>
+        </div>
+
+        <!-- Sektion 5: Pastell-Infokarten (CSS-Table für alte Browser statt Flexbox/Grid) -->
+        <div class="stats-grid">
+            <div class="stats-col">
+                <div class="pastell-card card-yellow">
+                    <strong>Gelbes Glas</strong><br>Weiche Pastelltöne
                 </div>
-                <p style="font-size: 0.85em; color: #1b557a;">Echtzeit-Synchronisation</p>
+            </div>
+            <div class="stats-col">
+                <div class="pastell-card card-teal">
+                    <strong>Aqua Türkis</strong><br>Frische Dynamik
+                </div>
             </div>
         </div>
 
     </div>
-</div>
 
-<!-- BACKWARDS COMPATIBLE JAVASCRIPT (ES5 Standard) -->
-<script type="text/javascript">
-    // DOM-Elemente holen (kompatibel mit IE9+, alten WebKit- & Android-Browsern)
-    var slider = document.getElementById("fluid-slider");
-    var sliderVal = document.getElementById("slider-val");
-    var energyBar = document.getElementById("energy-bar");
-    var themeSelect = document.getElementById("theme-select");
-    var statusDisplay = document.getElementById("status-display");
-    var btnWater = document.getElementById("btn-water");
-    var btnBubble = document.getElementById("btn-bubble");
-    var clockDisplay = document.getElementById("clock");
+    <!-- JAVASCRIPT: Reines ES5 (Kompatibel ab Android 4.0, extrem ressourcensparend) -->
+    <script>
+        var previewBox = document.getElementById('preview-box');
+        var sliderLabel = document.getElementById('slider-label');
 
-    // 1. Slider- & Progressbar-Logik
-    function updateProgress() {
-        var value = slider.value;
-        sliderVal.innerHTML = value;
-        energyBar.style.width = value + "%";
-    }
+        // Funktion zum Wechseln der aktiven Farbe
+        function changeColor(hexColor, name) {
+            previewBox.style.color = hexColor;
+            previewBox.innerHTML = "Aktiviertes Element: " + name;
+        }
 
-    // Event Listener (abwärtskompatibel registriert)
-    if (slider.addEventListener) {
-        slider.addEventListener("input", updateProgress, false);
-        slider.addEventListener("change", updateProgress, false); // Fallback für ganz alte Browser
-    }
-
-    // Initialer Aufruf
-    updateProgress();
-
-    // 2. Dropdown / Theme Wechsel Logik
-    if (themeSelect.addEventListener) {
-        themeSelect.addEventListener("change", function() {
-            var selectedTheme = themeSelect.value;
-            var body = document.body;
+        // Funktion für das Dropdown
+        function selectGlassStyle() {
+            var selector = document.getElementById('glass-selector');
+            var selectedValue = selector.value;
             
-            if (selectedTheme === "sky") {
-                body.style.background = "linear-gradient(135deg, #0d4b75 0%, #1785a5 40%, #5cb85c 100%)";
-                statusDisplay.innerHTML = "<strong>Status:</strong> Farbschema auf 'Aqua Sky Blue' gewechselt.";
-            } else if (selectedTheme === "eco") {
-                body.style.background = "linear-gradient(135deg, #0f5132 0%, #198754 40%, #9bf00b 100%)";
-                statusDisplay.innerHTML = "<strong>Status:</strong> Farbschema auf 'Eco Green' gewechselt. Sehr frisch!";
-            } else if (selectedTheme === "deep") {
-                body.style.background = "linear-gradient(135deg, #02111d 0%, #0d4b75 60%, #1785a5 100%)";
-                statusDisplay.innerHTML = "<strong>Status:</strong> Farbschema auf 'Deep Ocean' gewechselt. Elegant.";
+            var panel = document.querySelector('.glass-panel');
+            
+            if (selectedValue === 'clear') {
+                panel.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)';
+                changeColor('#2980b9', 'Klares Aquaglas');
+            } else if (selectedValue === 'frost') {
+                // Milchglas-Effekt durch höhere Deckkraft simuliert
+                panel.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,245,255,0.8) 100%)';
+                changeColor('#ff85a2', 'Milchglas');
+            } else if (selectedValue === 'deep') {
+                panel.style.background = 'linear-gradient(135deg, rgba(15,81,149,0.8) 0%, rgba(35,166,213,0.6) 100%)';
+                changeColor('#ff9f43', 'Tiefsee-Blau');
             }
-        }, false);
-    }
+        }
 
-    // 3. Button Klick-Effekte
-    if (btnWater.addEventListener) {
-        btnWater.addEventListener("click", function() {
-            statusDisplay.innerHTML = "<strong>Status:</strong> *Plätschern* Sound-Effekt simuliert! (Audio-Hardware bereit)";
-            // Kleiner visueller Flash-Effekt im Statusfeld
-            statusDisplay.style.background = "rgba(0, 136, 204, 0.3)";
-            setTimeout(function() {
-                statusDisplay.style.background = "rgba(255, 255, 255, 0.4)";
-            }, 300);
-        }, false);
-    }
-
-    if (btnBubble.addEventListener) {
-        btnBubble.addEventListener("click", function() {
-            statusDisplay.innerHTML = "<strong>Status:</strong> Seifenblase erzeugt! 🫧";
-            statusDisplay.style.background = "rgba(92, 184, 92, 0.3)";
-            setTimeout(function() {
-                statusDisplay.style.background = "rgba(255, 255, 255, 0.4)";
-            }, 300);
-        }, false);
-    }
-
-    // 4. Echtzeit-Aero-Uhr
-    function updateClock() {
-        var now = new Date();
-        var hours = now.getHours();
-        var minutes = now.getMinutes();
-        var seconds = now.getSeconds();
-
-        // Führende Nullen hinzufügen
-        if (hours < 10) hours = "0" + hours;
-        if (minutes < 10) minutes = "0" + minutes;
-        if (seconds < 10) seconds = "0" + seconds;
-
-        clockDisplay.innerHTML = hours + ":" + minutes + ":" + seconds;
-    }
-    
-    // Uhr sofort starten und jede Sekunde aktualisieren
-    updateClock();
-    setInterval(updateClock, 1000);
-</script>
-
+        // Funktion für den Live-Slider
+        function updateSliderValue(val) {
+            sliderLabel.innerHTML = "Regler-Wert: " + val + "%";
+            // Ändert die Schriftgröße der Box flüssig ohne Layout-Ruckler
+            previewBox.style.fontSize = (14 + (val / 10)) + "px";
+        }
+    </script>
 </body>
 </html>
