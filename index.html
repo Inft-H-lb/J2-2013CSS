@@ -2,12 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Aero Control Console 2013</title>
-    <!-- Der Standard-Viewport von 2013 für mobile Optimierung -->
+    <title>Aero Control Console 2013 Responsive</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <style>
-        /* 2013 Reset & Box-Sizing (mit allen alten Hersteller-Präfixen) */
+        /* 2013-2014 Reset & Box-Sizing */
         * {
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
@@ -15,47 +14,51 @@
             margin: 0;
             padding: 0;
             
-            /* Schutz vor hässlichen Klick-Rahmen im alten Android-Stock-Browser */
             -webkit-tap-highlight-color: rgba(0,0,0,0);
             -webkit-tap-highlight-color: transparent;
             outline: none;
             
-            /* Verhindert Textmarkierung beim Tippen auf Buttons */
             -webkit-user-select: none;
             -moz-user-select: none;
             user-select: none;
         }
 
+        /* 
+           BOMBENSICHERE ZENTRIERUNG FÜR RECHNER UND TABLETS (Ära 2013/2014)
+           Wir simulieren ein Tabellen-Layout, um vertikales Zentrieren ohne Flexbox zu garantieren.
+        */
         html, body {
             width: 100%;
             height: 100%;
+            display: table;
             background: #10213d;
             font-family: "Segoe UI", Helvetica, Arial, sans-serif;
         }
 
         body {
-            /* 2013-kompatibler Background-Gradient für alte Webkit-Engines */
             background: #1c365a;
             background: -webkit-gradient(linear, left top, right bottom, from(#10213d), color-stop(50%, #1c365a), to(#2b5c8f));
             background: -webkit-linear-gradient(135deg, #10213d 0%, #1c365a 50%, #2b5c8f 100%);
             background: linear-gradient(135deg, #10213d 0%, #1c365a 50%, #2b5c8f 100%);
             background-attachment: fixed;
             
-            padding: 15px;
-            overflow-y: auto; /* Scrollen erlauben, falls das Tablet im Hochformat ist */
+            display: table-cell;
+            vertical-align: middle; /* Zwingt den Inhalt in die vertikale Mitte */
+            padding: 2%; /* Dynamischer Außenabstand zum Bildschirmrand */
         }
 
-        /* Hilfsklasse für Floats (Der klassische 2013-Clearfix) */
+        /* Hilfsklasse für den Float-Umbruch */
         .clearfix:after {
             content: "";
             display: table;
             clear: both;
         }
 
-        /* DIE HAUPTKONSOLE */
+        /* DAS GEHÄUSE (Die Konsole) */
         .control-console {
-            max-width: 900px;
-            margin: 15px auto; /* Zentriert das Interface auf dem Screen */
+            width: 100%;
+            max-width: 920px;
+            margin: 0 auto; /* Zentriert horizontal */
             background: rgba(255, 255, 255, 0.20);
             
             border-top: 2px solid rgba(255, 255, 255, 0.8);
@@ -63,24 +66,24 @@
             border-right: 1px solid rgba(255, 255, 255, 0.2);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             
-            -webkit-border-radius: 16px;
-            border-radius: 16px;
-            padding: 20px;
+            -webkit-border-radius: 18px;
+            border-radius: 18px;
+            padding: 3%; /* Orientiert sich an der Konsolen-Größe */
             
-            -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            -webkit-box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
         }
 
-        /* KONSOLEN-KOPFZEILE */
+        /* HEADER */
         .console-header {
             border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-            padding-bottom: 12px;
-            margin-bottom: 25px; /* Ordentlicher Margin nach unten */
+            padding-bottom: 1.5%;
+            margin-bottom: 3%; /* Dynamischer Abstand nach unten */
         }
 
         .console-title {
             float: left;
-            font-size: 18px;
+            font-size: 1.2em; /* Schriftgrößen basieren auf 'em' für gegenseitige Anpassung */
             font-weight: bold;
             color: #ffffff;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
@@ -88,9 +91,9 @@
 
         .status-dot-container {
             float: right;
-            font-size: 11px;
+            font-size: 0.75em;
             color: #b3f5ff;
-            margin-top: 4px;
+            margin-top: 5px;
             text-transform: uppercase;
         }
 
@@ -101,42 +104,33 @@
             background-color: #00ff66;
             -webkit-border-radius: 50%;
             border-radius: 50%;
-            margin-right: 5px;
+            margin-right: 6px;
             -webkit-box-shadow: 0 0 8px #00ff66;
             box-shadow: 0 0 8px #00ff66;
             vertical-align: middle;
         }
 
-        /* 2-SPALTEN BINDUNG (BOMBEN-STABIL OHNE FLEXBOX) */
-        .column-left {
-            width: 48%;
-            float: left;
-            margin-right: 4%;
-        }
-
-        .column-right {
-            width: 48%;
-            float: left;
-        }
-
-        /* PRÄZISE ABSTÄNDE FÜR DIE STEUERELEMENTE */
+        /* GRUPPEN-MARGINS */
         .control-group {
-            margin-bottom: 22px; /* Genügend Abstand zwischen den Elementen */
+            margin-bottom: 5%; /* Elemente halten proportionalen Abstand zueinander */
+        }
+        .control-group:last-child {
+            margin-bottom: 0;
         }
 
         .control-label {
             display: block;
-            font-size: 11px;
+            font-size: 0.75em;
             font-weight: bold;
             color: #abd8f5;
-            margin-bottom: 8px; /* Abstand zwischen Label und Regler/Button */
+            margin-bottom: 3%;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* SCHIEBEREGLER (SLIDER) */
+        /* REGLER (SLIDER) */
         .slider-container {
-            padding: 5px 0;
+            padding: 2% 0;
         }
 
         .aero-slider {
@@ -150,47 +144,47 @@
             outline: none;
         }
 
-        /* Der Slider-Knopf - extra groß für kapazitive 2013-Touchscreens */
         .aero-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             width: 24px;
             height: 24px;
-            -webkit-border-radius: 12px;
-            border-radius: 12px;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
             background: #ffffff;
-            background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cbd5e0));
             background: -webkit-linear-gradient(top, #ffffff 0%, #cbd5e0 100%);
-            background: linear-gradient(to bottom, #ffffff 0%, #cbd5e0 100%);
             border: 1px solid #4a5568;
             -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.4);
             box-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
 
-        /* SELECT-DROPDOWN */
+        /* SELECT */
         .aero-select {
             display: block;
             width: 100%;
-            padding: 12px;
+            padding: 3.5%;
             border: 1px solid rgba(0,0,0,0.4);
             background: #ffffff;
             color: #0f172a;
-            font-size: 13px;
+            font-size: 0.85em;
             font-weight: bold;
             -webkit-border-radius: 8px;
             border-radius: 8px;
         }
 
-        /* BUTTON ROW (Kein CSS Grid!) */
+        /* BUTTON ROW */
         .btn-row {
-            margin-bottom: 8px;
-            overflow: hidden; /* Behebt Floats innerhalb der Reihe */
+            margin-bottom: 3%;
+            overflow: hidden;
+        }
+        .btn-row:last-child {
+            margin-bottom: 0;
         }
 
         .aero-btn {
             width: 48%;
             float: left;
-            padding: 12px 5px;
-            font-size: 11px;
+            padding: 3.5% 2%;
+            font-size: 0.75em;
             font-weight: bold;
             color: #ffffff;
             text-align: center;
@@ -198,8 +192,6 @@
             -webkit-border-radius: 10px;
             border-radius: 10px;
             
-            /* 2013 Hochglanz-Optik (Glossy) über Linear-Gradients */
-            background: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.45)), color-stop(48%, rgba(255,255,255,0.15)), color-stop(52%, rgba(0,0,0,0.15)), to(rgba(0,0,0,0.0)));
             background: -webkit-linear-gradient(top, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 48%, rgba(0,0,0,0.15) 52%, rgba(0,0,0,0.0) 100%);
             background: linear-gradient(to bottom, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 48%, rgba(0,0,0,0.15) 52%, rgba(0,0,0,0.0) 100%);
             
@@ -207,7 +199,6 @@
             box-shadow: inset 0 1px 1px rgba(255,255,255,0.5), 0 2px 3px rgba(0,0,0,0.3);
         }
 
-        /* Abstand für den linken Button in jeder Zeile */
         .aero-btn.btn-left {
             margin-right: 4%;
         }
@@ -219,46 +210,46 @@
         }
 
         .btn-aqua   { background-color: #00b4d8; }
-        .btn-lime   { background-color: #52b788; color: #072213; } /* Etwas satteres Grün für ältere LCDs */
+        .btn-lime   { background-color: #52b788; color: #072213; }
         .btn-rose   { background-color: #ff9ebb; color: #3d0d1b; }
         .btn-canary { background-color: #ffe494; color: #3d310d; }
 
         /* RECHTE SPALTE: DAS LCD DISPLAY */
         .lcd-screen {
-            background: #000a14; /* Solides Schwarz, falls opacity laggt */
+            background: #000a14;
             border: 2px solid rgba(255,255,255,0.15);
             -webkit-border-radius: 10px;
             border-radius: 10px;
-            padding: 25px 15px;
+            padding: 6% 4%;
             text-align: center;
             -webkit-box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
             box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
-            margin-bottom: 22px; /* Luft zu den Status-Karten darunter */
+            margin-bottom: 5%;
         }
 
         .lcd-indicator {
-            font-size: 11px;
+            font-size: 0.75em;
             color: #82d8ff;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 6px;
+            margin-bottom: 2%;
         }
 
         .lcd-main-value {
-            font-size: 24px;
+            font-size: 1.6em;
             font-weight: bold;
             color: #00b4d8;
-            margin: 6px 0;
+            margin: 3% 0;
             text-shadow: 0 0 8px rgba(0, 180, 216, 0.7);
         }
 
         .lcd-sub-value {
-            font-size: 11px;
+            font-size: 0.7em;
             color: #ffffff;
             opacity: 0.6;
         }
 
-        /* ZWEI MINI-CARDS DARUNTER (Floated) */
+        /* INFOCARDS */
         .info-cards {
             width: 100%;
         }
@@ -266,10 +257,10 @@
         .mini-card {
             width: 48%;
             float: left;
-            padding: 10px 5px;
+            padding: 3% 1%;
             -webkit-border-radius: 6px;
             border-radius: 6px;
-            font-size: 11px;
+            font-size: 0.72em;
             text-align: center;
             color: #222222;
             font-weight: bold;
@@ -284,18 +275,52 @@
         .card-teal   { background: #81ecec; }
 
 
-        /* RESPONSIVE DESIGN (Für Hochformat-Ausrichtung auf Tablets/Handys) */
-        @media (max-width: 650px) {
+        /* 
+           =========================================
+           ORIENTATION MEDIA QUERIES (STAND 2013)
+           =========================================
+        */
+
+        /* QUERFORMAT (Landscape) - Zwei Spalten nebeneinander */
+        @media screen and (orientation: landscape) {
+            .column-left {
+                width: 48%;
+                float: left;
+                margin-right: 4%;
+            }
+
+            .column-right {
+                width: 48%;
+                float: left;
+            }
+            
+            /* Verhindert, dass die Konsole im flachen Querformat zu hoch wird */
+            .control-console {
+                padding: 2% 3%;
+            }
+            .control-group {
+                margin-bottom: 3.5%;
+            }
+        }
+
+        /* HOCHFORMAT (Portrait) - Spalten brechen sauber untereinander um */
+        @media screen and (orientation: portrait) {
             .column-left, .column-right {
                 width: 100%;
                 float: none;
                 margin-right: 0;
             }
 
+            /* Extra Abstand zwischen den beiden Spalten, wenn sie untereinander stehen */
             .column-left {
                 border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-                padding-bottom: 15px;
-                margin-bottom: 25px; /* Großer Margin zur Trennung der Spalten im Hochformat */
+                padding-bottom: 5%;
+                margin-bottom: 5%;
+            }
+            
+            /* Skaliert die Buttons im Hochformat etwas gemütlicher für dicke Daumen */
+            .aero-btn {
+                padding: 4.5% 2%;
             }
         }
     </style>
@@ -306,13 +331,13 @@
         
         <!-- Header -->
         <div class="console-header clearfix">
-            <div class="console-title">Aero-System Console v1.7</div>
+            <div class="console-title">Aero-System Console v1.8</div>
             <div class="status-dot-container">
                 <div class="status-dot"></div> System Aktiv
             </div>
         </div>
 
-        <!-- Zwei-Spalten-Container -->
+        <!-- Inhaltsbereich -->
         <div class="console-row clearfix">
             
             <!-- LINKE SPALTE: REGLER & BUTTONS -->
@@ -343,7 +368,7 @@
                         <div class="aero-btn btn-left btn-aqua" onclick="selectElement('Aqua Blau', '#00b4d8')">Aqua</div>
                         <div class="aero-btn btn-lime" onclick="selectElement('Eco Grün', '#52b788')">Lime</div>
                     </div>
-                    <div class="btn-row" style="margin-bottom: 0;">
+                    <div class="btn-row">
                         <div class="aero-btn btn-left btn-rose" onclick="selectElement('Soft Pink', '#ff9ebb')">Rose</div>
                         <div class="aero-btn btn-canary" onclick="selectElement('Pastell Gelb', '#ffe494')">Lemon</div>
                     </div>
@@ -376,7 +401,7 @@
         </div>
     </div>
 
-    <!-- PURES ES5 JAVASCRIPT (Lauft auf Android 4 Browsern perfekt stabil) -->
+    <!-- PURES ES5 JAVASCRIPT -->
     <script>
         var outputBox = document.getElementById('output-box');
         var subOutput = document.getElementById('sub-output');
@@ -404,8 +429,9 @@
 
         function handleSlider(val) {
             sliderText.innerHTML = "Frequenz-Sättigung: " + val + "%";
-            var newSize = 18 + (val / 6);
-            outputBox.style.fontSize = newSize + "px";
+            // Dynamische Font-Skalierung basierend auf 'em'
+            var newSize = 1.2 + (val / 100); 
+            outputBox.style.fontSize = newSize + "em";
         }
     </script>
 </body>
