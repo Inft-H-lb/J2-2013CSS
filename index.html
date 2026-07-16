@@ -2,11 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>AeroGlass Showcase (Optimized)</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Aero Control Console</title>
+    <!-- Optimiert für das Display-Verhältnis des Galaxy Tab E -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
     
     <style>
-        /* RESET & ANDROID TAP-HIGHLIGHT FIX */
+        /* APP-RESET: Verhindert jegliche standardmäßige Browser-Markierung */
         * {
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
@@ -14,267 +15,454 @@
             margin: 0;
             padding: 0;
             
-            /* Verhindert die hässlichen weißen/blauen Boxen beim Antippen unter Android KitKat */
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-            -webkit-tap-highlight-color: transparent;
+            /* Aggressiver Schutz gegen weiße/blaue Klick-Boxen auf alten Android-Webkits */
+            -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+            -webkit-tap-highlight-color: transparent !important;
+            -webkit-focus-ring-color: rgba(0,0,0,0) !important;
+            outline: none !important;
+            
+            /* Textmarkierung verhindern für echtes App-Feeling */
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* Das Interface füllt exakt den Viewport aus, kein Scrollen */
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #10213d;
+            font-family: "Segoe UI", Helvetica, Arial, sans-serif;
         }
 
         body {
-            font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-            background: #1e3c72;
-            background: -webkit-linear-gradient(135deg, #122544 0%, #1e3c72 40%, #2a69ac 70%, #8ac1f7 100%);
-            background: linear-gradient(135deg, #122544 0%, #1e3c72 40%, #2a69ac 70%, #8ac1f7 100%);
-            background-attachment: fixed;
-            color: #ffffff;
-            padding: 20px 15px;
-            min-height: 100vh;
+            /* Hintergrund-Verlauf im Frutiger-Stil (heller Schein von rechts oben) */
+            background: #1c365a;
+            background: -webkit-linear-gradient(135deg, #10213d 0%, #1c365a 50%, #2b5c8f 100%);
+            background: linear-gradient(135deg, #10213d 0%, #1c365a 50%, #2b5c8f 100%);
+            padding: 15px;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
         }
 
-        /* LIQUID GLASS PANEL (Flach ohne Schachtelung)
-           Optimierter 3D-Glasglanz für ruckelfreies Rendern */
-        .glass-panel {
-            /* Heller, glänzender Verlauf von oben nach unten */
-            background: rgba(255, 255, 255, 0.25);
-            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%);
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%);
+        /* DAS STEUERPULT (Natives App-Gehäuse) */
+        .control-console {
+            width: 100%;
+            max-width: 960px;
+            height: 100%;
+            max-height: 540px; /* Perfekt für das 16:10 / 16:9 Verhältnis des Tablets */
             
-            /* Extrem scharfe Lichtkante oben für den flüssigen Glaseffekt */
-            border-top: 2px solid rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.22);
+            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 100%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 100%);
+            
+            border-top: 2px solid rgba(255, 255, 255, 0.85);
             border-left: 2px solid rgba(255, 255, 255, 0.6);
             border-right: 1px solid rgba(255, 255, 255, 0.2);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             
-            -webkit-border-radius: 20px;
-            border-radius: 20px;
+            -webkit-border-radius: 24px;
+            border-radius: 24px;
             
-            padding: 30px 20px;
-            max-width: 650px;
-            margin: 20px auto;
+            padding: 20px;
             
-            -webkit-box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.4);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.4);
+            -webkit-box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.3);
+            
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
         }
 
-        h1 {
-            font-size: 28px;
-            text-align: center;
-            color: #ffffff;
-            /* Schlagschatten für die typische Frutiger-Schriftlesbarkeit */
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            margin-bottom: 30px;
+        /* CONSOLE HEADER */
+        .console-header {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-pack: space-between;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        .console-title {
+            font-size: 20px;
             font-weight: bold;
-            letter-spacing: 0.5px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
         }
 
-        /* TEXT-LABEL (Ersetzt die geschachtelten Sektionen) */
+        .status-dot-container {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            font-size: 11px;
+            color: #b3f5ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00ff66;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            margin-right: 8px;
+            -webkit-box-shadow: 0 0 8px #00ff66;
+            box-shadow: 0 0 8px #00ff66;
+        }
+
+        /* ZWEI-SPALTEN LAYOUT (Wie ein echtes physisches Terminal) */
+        .console-grid {
+            -webkit-box-flex: 1;
+            flex: 1;
+            display: -webkit-box;
+            display: flex;
+            height: calc(100% - 60px);
+        }
+
+        /* Linke Spalte: Regler & Knöpfe */
+        .controls-column {
+            -webkit-box-flex: 1;
+            flex: 1;
+            padding-right: 15px;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            -webkit-box-pack: space-around;
+            justify-content: space-around;
+        }
+
+        /* Rechte Spalte: Das Display */
+        .display-column {
+            -webkit-box-flex: 1;
+            flex: 1;
+            padding-left: 15px;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+        }
+
+        .control-group {
+            margin-bottom: 12px;
+        }
+
         .control-label {
             display: block;
-            font-size: 14px;
+            font-size: 11px;
             font-weight: bold;
-            color: #e0f2fe;
+            color: #abd8f5;
             text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-            margin: 20px 0 8px 5px;
+            margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* REGLER (SLIDER) - High Performance */
-        .slider-container {
-            margin: 10px 0;
-        }
-
+        /* REGLER (SLIDER) */
         .aero-slider {
             -webkit-appearance: none;
             width: 100%;
-            height: 12px;
-            -webkit-border-radius: 6px;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.3);
-            background: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(255,255,255,0.15) 100%);
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(255,255,255,0.15) 100%);
-            border: 1px solid rgba(255,255,255,0.4);
-            outline: none;
+            height: 10px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            outline: none !important;
         }
 
-        /* Regler-Knopf (Skeuomorphe Glasperle) */
         .aero-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             -webkit-border-radius: 50%;
             border-radius: 50%;
             background: #ffffff;
-            background: -webkit-linear-gradient(top, #ffffff 0%, #d1d5db 40%, #9ca3af 100%);
-            border: 1px solid #777;
+            background: -webkit-linear-gradient(top, #ffffff 0%, #cbd5e0 40%, #718096 100%);
+            border: 1px solid #4a5568;
             -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.4);
             box-shadow: 0 2px 4px rgba(0,0,0,0.4);
             cursor: pointer;
         }
 
-        /* DROPDOWN - Edel, sauber, ohne Schachtelung */
+        /* SELECT-FELD (Dropdown im Aero-Style) */
         .aero-select {
             display: block;
             width: 100%;
-            padding: 12px;
-            border: 1px solid rgba(255,255,255,0.5);
+            padding: 10px;
+            border: 1px solid rgba(0,0,0,0.3);
             background: rgba(255, 255, 255, 0.85);
-            color: #111827;
-            font-size: 15px;
-            font-weight: 500;
-            -webkit-border-radius: 10px;
-            border-radius: 10px;
-            outline: none;
+            color: #0f172a;
+            font-size: 13px;
+            font-weight: bold;
+            -webkit-border-radius: 8px;
+            border-radius: 8px;
             cursor: pointer;
-            -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1);
+            -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
         }
 
-        /* BUTTON GROUP & AQUA BUTTONS */
-        .button-row {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
+        /* GLOSSY BUTTONS */
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
         }
 
         .aero-btn {
-            display: inline-block;
-            padding: 12px 22px;
-            margin: 6px;
-            font-size: 14px;
+            padding: 10px;
+            font-size: 12px;
             font-weight: bold;
             color: #ffffff;
+            text-align: center;
             text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
-            border: 1px solid rgba(0,0,0,0.25);
-            -webkit-border-radius: 30px;
-            border-radius: 30px;
+            border: 1px solid rgba(0,0,0,0.3);
+            -webkit-border-radius: 14px;
+            border-radius: 14px;
             cursor: pointer;
             
-            /* Glanz-Verlauf für den "Water Bubble"-Effekt */
-            background: -webkit-linear-gradient(top, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 48%, rgba(0,0,0,0.15) 52%, rgba(0,0,0,0.0) 100%);
-            background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 48%, rgba(0,0,0,0.15) 52%, rgba(0,0,0,0.0) 100%);
+            background: -webkit-linear-gradient(top, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 48%, rgba(0,0,0,0.15) 52%, rgba(0,0,0,0.0) 100%);
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 48%, rgba(0,0,0,0.15) 52%, rgba(0,0,0,0.0) 100%);
             
-            -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 3px 6px rgba(0,0,0,0.2);
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 3px 6px rgba(0,0,0,0.2);
-            
-            -webkit-transition: opacity 0.1s ease-out;
-            transition: opacity 0.1s ease-out;
+            -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.2);
         }
 
-        /* Touch-Feedback (Klick) ohne Performance-Verlust */
         .aero-btn:active {
-            -webkit-transform: scale(0.97);
-            transform: scale(0.97);
+            -webkit-transform: scale(0.96);
+            transform: scale(0.96);
             opacity: 0.9;
         }
 
-        /* Frutiger Aero Farben (Pastelle & Aquas) */
-        .btn-aqua   { background-color: #00b4d8; } /* Strahlendes Aqua */
-        .btn-lime   { background-color: #72efdd; color: #0f343a; text-shadow: none; } /* Pastell-Limette */
-        .btn-rose   { background-color: #ff9ebb; } /* Pastell-Rosa */
-        .btn-canary { background-color: #ffe494; color: #3a2e0f; text-shadow: none; } /* Pastell-Gelb */
+        .btn-aqua   { background-color: #00b4d8; }
+        .btn-lime   { background-color: #72efdd; color: #0d3831; text-shadow: none; }
+        .btn-rose   { background-color: #ff9ebb; }
+        .btn-canary { background-color: #ffe494; color: #3d310d; text-shadow: none; }
 
-        /* INTERAKTIVE ANZEIGENBOX */
-        .preview-display {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(255,255,255,0.8);
+        /* RECHTE SPALTE: DAS AKTUELLE DISPLAY (Simuliert ein LCD-Panel) */
+        .lcd-screen {
+            background: rgba(0, 10, 20, 0.75);
+            border: 2px solid rgba(255,255,255,0.2);
             -webkit-border-radius: 12px;
             border-radius: 12px;
-            padding: 18px;
-            text-align: center;
-            margin-top: 25px;
-            font-weight: bold;
-            font-size: 16px;
-            color: #00b4d8;
-            text-shadow: 1px 1px 0px #ffffff;
-            -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.1);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.1);
+            padding: 15px;
+            -webkit-box-flex: 1;
+            flex: 1;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,0.8), 0 0 15px rgba(0, 180, 216, 0.1);
+            box-shadow: inset 0 3px 8px rgba(0,0,0,0.8), 0 0 15px rgba(0, 180, 216, 0.1);
+            margin-bottom: 10px;
         }
 
-        /* SEITEN-INFO (Ganz unten, dezent) */
-        .footer-info {
+        .lcd-indicator {
+            font-size: 14px;
+            color: #82d8ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .lcd-main-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00b4d8;
+            text-shadow: 0 0 10px rgba(0, 180, 216, 0.8);
+            margin: 5px 0;
             text-align: center;
+        }
+
+        .lcd-sub-value {
+            font-size: 12px;
+            color: #ffffff;
+            opacity: 0.7;
+        }
+
+        /* PASTELL INFOCARDS */
+        .info-cards {
+            display: -webkit-box;
+            display: flex;
+            gap: 10px;
+        }
+
+        .mini-card {
+            -webkit-box-flex: 1;
+            flex: 1;
+            padding: 10px;
+            -webkit-border-radius: 8px;
+            border-radius: 8px;
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 20px;
-            text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+            text-align: center;
+            color: #222;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+        }
+
+        .card-yellow { background: #ffe494; }
+        .card-teal   { background: #81ecec; }
+
+        /* WEICHER HOVER-REDUKTIONS-TRICK:
+           Für alte Android-Browser schalten wir Mouse-Hover-Effekte komplett ab, 
+           da diese auf Touch-Geräten oft "kleben" bleiben und rechenintensiv sind. */
+        @media (max-width: 800px) {
+            .console-grid {
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                flex-direction: column;
+                overflow-y: auto;
+            }
+            .controls-column {
+                padding-right: 0;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.15);
+                padding-bottom: 15px;
+                margin-bottom: 15px;
+            }
+            .display-column {
+                padding-left: 0;
+            }
+            .control-console {
+                max-height: none;
+                height: auto;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="glass-panel">
-        <h1>AeroGlass Labs</h1>
-
-        <!-- Steuerelement 1: Die schwebenden Aqua- & Pastell-Buttons -->
-        <label class="control-label">Aero Farb-Aktivierung</label>
-        <div class="button-row">
-            <div class="aero-btn btn-aqua" onclick="selectElement('Aqua Blau', '#00b4d8')">Aqua Blue</div>
-            <div class="aero-btn btn-lime" onclick="selectElement('Weiche Limette', '#38b000')">Lime Soda</div>
-            <div class="aero-btn btn-rose" onclick="selectElement('Pastell Rosa', '#ff5c8a')">Rose Glass</div>
-            <div class="aero-btn btn-canary" onclick="selectElement('Zitronen Gelb', '#e6b000')">Sunny Lemon</div>
+    <div class="control-console">
+        <!-- Konsolen-Header mit Status-LED -->
+        <div class="console-header">
+            <div class="console-title">Aero-System Console v1.4</div>
+            <div class="status-dot-container">
+                <div class="status-dot"></div> System Aktiv
+            </div>
         </div>
 
-        <!-- Steuerelement 2: Dropdown-Menü -->
-        <label class="control-label" for="style-dropdown">Oberflächen-Struktur</label>
-        <select class="aero-select" id="style-dropdown" onchange="updateStyle(this.value)">
-            <option value="high-gloss">Hoher Glanzgrad (Standard)</option>
-            <option value="semi-matte">Satiniertes Glas (Pastell-Hintergrund)</option>
-            <option value="dark-aqua">Deep Ocean Aqua (Dunkelblau)</option>
-        </select>
+        <div class="console-grid">
+            
+            <!-- LINKE SPALTE: BEDIENUNG -->
+            <div class="controls-column">
+                
+                <!-- Regler -->
+                <div class="control-group">
+                    <label class="control-label" id="slider-text" for="range-slider">Frequenz-Sättigung: 50%</label>
+                    <input type="range" class="aero-slider" id="range-slider" min="10" max="90" value="50" oninput="handleSlider(this.value)">
+                </div>
 
-        <!-- Steuerelement 3: Regler -->
-        <label class="control-label" id="slider-text" for="range-slider">Glas-Sättigung: 50%</label>
-        <div class="slider-container">
-            <input type="range" class="aero-slider" id="range-slider" min="10" max="90" value="50" oninput="handleSlider(this.value)">
-        </div>
+                <!-- Dropdown -->
+                <div class="control-group">
+                    <label class="control-label" for="style-dropdown">Sensor-Modus</label>
+                    <select class="aero-select" id="style-dropdown" onchange="updateStyle(this.value)">
+                        <option value="high-gloss">Klarer Laser-Modus (Aero)</option>
+                        <option value="semi-matte">Satinierter Eco-Modus (Lime)</option>
+                        <option value="dark-aqua">Tiefsee-Sonar (Aqua)</option>
+                    </select>
+                </div>
 
-        <!-- Live-Ausgabebox -->
-        <div class="preview-display" id="output-box">
-            Auswahl: Aqua Blau
+                <!-- Direkt-Tasten -->
+                <div class="control-group">
+                    <label class="control-label">Farb-Injektor</label>
+                    <div class="btn-grid">
+                        <div class="aero-btn btn-aqua" onclick="selectElement('Aqua Blau', '#00b4d8')">Aqua</div>
+                        <div class="aero-btn btn-lime" onclick="selectElement('Eco Grün', '#72efdd')">Lime</div>
+                        <div class="aero-btn btn-rose" onclick="selectElement('Soft Pink', '#ff9ebb')">Rose</div>
+                        <div class="aero-btn btn-canary" onclick="selectElement('Pastell Gelb', '#ffe494')">Lemon</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RECHTE SPALTE: AUSGABE (DISPLAY) -->
+            <div class="display-column">
+                
+                <!-- LCD Panel -->
+                <div class="lcd-screen">
+                    <div class="lcd-indicator">Status-Anzeige</div>
+                    <div class="lcd-main-value" id="output-box">Aqua Blau</div>
+                    <div class="lcd-sub-value" id="sub-output">Modul bereit // Signal stabil</div>
+                </div>
+
+                <!-- Pastell Statuscards -->
+                <div class="info-cards">
+                    <div class="mini-card card-yellow">
+                        Kanal A: Aktiv
+                    </div>
+                    <div class="mini-card card-teal">
+                        Kanal B: Standby
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 
-    <div class="footer-info">
-        Optimiert für Android 4.4 &amp; Samsung Galaxy Tab E
-    </div>
-
-    <!-- ES5 JAVASCRIPT (Maximale Performance, kein "Let/Const", kein Ruckeln) -->
+    <!-- ES5 JAVASCRIPT (Maximale Performance auf altem KitKat-Tablet) -->
     <script>
         var outputBox = document.getElementById('output-box');
+        var subOutput = document.getElementById('sub-output');
         var sliderText = document.getElementById('slider-text');
-        var mainPanel = document.querySelector('.glass-panel');
+        var mainConsole = document.querySelector('.control-console');
 
-        // Funktion für Button-Klicks
+        // Farb-Aktivierung über Buttons
         function selectElement(name, hexColor) {
             outputBox.style.color = hexColor;
-            outputBox.innerHTML = "Auswahl: " + name;
+            outputBox.style.textShadow = "0 0 10px " + hexColor;
+            outputBox.innerHTML = name;
+            subOutput.innerHTML = "Injektor-Signal kalibriert auf: " + hexColor;
         }
 
-        // Funktion für Dropdown-Wechsel
+        // Moduswechsel über Dropdown
         function updateStyle(value) {
             if (value === 'high-gloss') {
-                mainPanel.style.background = 'linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%)';
-                // Altes Webkit-Fallback
-                mainPanel.style.background = '-webkit-linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%)';
-                selectElement('Hoher Glanzgrad', '#00b4d8');
+                mainConsole.style.background = 'linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 100%)';
+                mainConsole.style.background = '-webkit-linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 100%)';
+                selectElement('Aqua Blau', '#00b4d8');
             } else if (value === 'semi-matte') {
-                mainPanel.style.background = 'linear-gradient(to bottom, rgba(255, 255, 255, 0.75) 0%, rgba(240, 245, 255, 0.6) 100%)';
-                mainPanel.style.background = '-webkit-linear-gradient(top, rgba(255, 255, 255, 0.75) 0%, rgba(240, 245, 255, 0.6) 100%)';
-                selectElement('Satiniertes Glas', '#ff5c8a');
+                mainConsole.style.background = 'linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%, rgba(230, 245, 255, 0.4) 100%)';
+                mainConsole.style.background = '-webkit-linear-gradient(top, rgba(255, 255, 255, 0.6) 0%, rgba(230, 245, 255, 0.4) 100%)';
+                selectElement('Eco Grün', '#72efdd');
             } else if (value === 'dark-aqua') {
-                mainPanel.style.background = 'linear-gradient(to bottom, rgba(0, 180, 216, 0.45) 0%, rgba(18, 37, 68, 0.3) 100%)';
-                mainPanel.style.background = '-webkit-linear-gradient(top, rgba(0, 180, 216, 0.45) 0%, rgba(18, 37, 68, 0.3) 100%)';
-                selectElement('Deep Ocean Aqua', '#ffe494');
+                mainConsole.style.background = 'linear-gradient(to bottom, rgba(0, 180, 216, 0.35) 0%, rgba(16, 33, 61, 0.25) 100%)';
+                mainConsole.style.background = '-webkit-linear-gradient(top, rgba(0, 180, 216, 0.35) 0%, rgba(16, 33, 61, 0.25) 100%)';
+                selectElement('Tiefsee Sonar', '#ffe494');
             }
         }
 
-        // Funktion für den Slider (Regler)
+        // Slider-Wert verändern
         function handleSlider(val) {
-            sliderText.innerHTML = "Glas-Sättigung: " + val + "%";
+            sliderText.innerHTML = "Frequenz-Sättigung: " + val + "%";
             
-            // Verändert flüssig die Textgröße der Ausgabebox (Keine rechenintensiven CSS-Transitions nötig)
-            var newSize = 12 + (val / 10);
+            // Verändert die LCD-Textgröße flüssig (Performanter als CSS Transitionen)
+            var newSize = 20 + (val / 5);
             outputBox.style.fontSize = newSize + "px";
+            subOutput.innerHTML = "Sättigungs-Amplitude angepasst.";
         }
     </script>
 </body>
