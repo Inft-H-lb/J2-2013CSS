@@ -80,5 +80,5 @@ window.addEventListener("orientationchange", function() {
     // damit der alte Browser gezwungen wird, das Bild neu zu berechnen
     setTimeout(function() {
         styleTag.innerHTML = styleTag.innerHTML;
-    }, 200);
+    }, 800);
 });
