@@ -10,6 +10,7 @@ styleTag.innerHTML = `
   left: -10px;
   right: -10px;
   background-image: url(https://static.giga.de/wp-content/uploads/2019/12/Gruene-Idylle-rcm1680x944u.jpg);
+  -webkit-background-size: cover;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -56,6 +57,7 @@ document.addEventListener('keydown', function(event){
                     left: -10px;
                     right: -10px;
                     background-image: url(https://static.giga.de/wp-content/uploads/2019/12/Gruene-Idylle-rcm1680x944u.jpg);
+                    -webkit-background-size: cover;
                     background-size: cover;
                     background-position: center;
                     background-attachment: fixed;
