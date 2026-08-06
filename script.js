@@ -79,6 +79,23 @@ window.addEventListener("orientationchange", function() {
     // Kurzer Trick: Nach dem Drehen einmal kurz den Style-Inhalt neu triggern, 
     // damit der alte Browser gezwungen wird, das Bild neu zu berechnen
     setTimeout(function() {
-        styleTag.innerHTML = styleTag.innerHTML;
+        styleTag.innerHTML = `
+          .glass::before{
+          content: "";
+          position: absolute;
+          top: -10px;
+          bottom: -10px;
+          left: -10px;
+          right: -10px;
+          background-image: url(https://static.giga.de/wp-content/uploads/2019/12/Gruene-Idylle-rcm1680x944u.jpg);
+          -webkit-background-size: cover;
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+          z-index: -1;
+          -webkit-filter: blur(4px);
+          filter: blur(4px);
+        }
+        `;
     }, 1200);
 });
