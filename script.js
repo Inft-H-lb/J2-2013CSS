@@ -76,9 +76,11 @@ document.addEventListener('keydown', function(event){
 });
 
 window.addEventListener("orientationchange", function() {
-    // Kurzer Trick: Nach dem Drehen einmal kurz den Style-Inhalt neu triggern, 
-    // damit der alte Browser gezwungen wird, das Bild neu zu berechnen
     setTimeout(function() {
-        styleTag.innerHTML = styleTag.innerHTML;
-    }, 1200);
+        var currentCSS = styleTag.innerHTML;
+        styleTag.innerHTML = ""; // Styles komplett löschen
+        setTimeout(function() {
+            styleTag.innerHTML = currentCSS; // Styles neu schreiben
+        }, 50);
+    }, 200);
 });
