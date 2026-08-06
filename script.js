@@ -13,6 +13,7 @@ styleTag.innerHTML = `
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
   z-index: -1;
   -webkit-filter: blur(4px);
   filter: blur(4px);
@@ -59,6 +60,7 @@ document.addEventListener('keydown', function(event){
                     -webkit-background-size: cover;
                     background-size: cover;
                     background-position: center;
+                    background-attachment: fixed;
                     z-index: -1;
                     -webkit-filter: blur(4px);
                     filter: blur(4px);
@@ -71,4 +73,12 @@ document.addEventListener('keydown', function(event){
             bg_toggle = 0;
     }
     } 
+});
+
+window.addEventListener("orientationchange", function() {
+    // Kurzer Trick: Nach dem Drehen einmal kurz den Style-Inhalt neu triggern, 
+    // damit der alte Browser gezwungen wird, das Bild neu zu berechnen
+    setTimeout(function() {
+        styleTag.innerHTML = styleTag.innerHTML;
+    }, 200);
 });
