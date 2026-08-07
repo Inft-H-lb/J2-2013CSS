@@ -32,6 +32,7 @@ body.mode-gradient {
 .widget-raster {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .main_widget {
@@ -41,6 +42,7 @@ body.mode-gradient {
   width: 100%; 
   padding-bottom: 10px;
   padding-right: 10px;
+  position: relative;
 }
 
 .container_widget{
@@ -50,6 +52,7 @@ body.mode-gradient {
   width: 100%;
   padding-bottom: 10px;
   padding-right: 10px;
+  position: relative;
 }
 
 .glass{
@@ -69,8 +72,16 @@ body.mode-gradient {
 }
 
 /* Das Pseudo-Element für das Glas-Panel im Standard (Bild) */
-.glass::before{
-  content: "";
+.glass_blur{
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  border-style: solid;
+  border-color: #439fd400;
+  border-radius: 30px;
+  border-width: 0;
+  
   position: absolute;
   top: 0;
   bottom: 0;
@@ -78,10 +89,14 @@ body.mode-gradient {
   right: 0;
   background-color: rgba(166, 184, 199, 0.2);
   z-index: -1;
+
+  filter: url(#ie-blur); /*Für den Fall, dass nicht mal -webkit-filter: blur(4px) funktioniert*/
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
 }
 
 /* Wenn Body die Klasse hat, schaltet auch das Pseudo-Element auf Gradient um */
-body.mode-gradient .glass::before{
+body.mode-gradient .glass_blur{
   background-image: linear-gradient(
     to bottom left,
     #439fd4,
