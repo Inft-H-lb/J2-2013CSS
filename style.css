@@ -77,11 +77,6 @@ body.mode-gradient {
   left: 0;
   right: 0;
   background-color: rgba(166, 184, 199, 0.2);
-
-  background-image: url(bilder/XP.jpg);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
   z-index: -1;
 
   filter: url(#ie-blur); /*Für den Fall, dass nicht mal -webkit-filter: blur(4px) funktioniert*/
@@ -124,5 +119,25 @@ body.mode-gradient .glass::before{
   .container_widget{
     width: 66.7%;
     height: 100%;
+  }
+}
+
+/* Gilt, wenn das Gerät im Hochformat (Portrait) ist */
+@media screen and (orientation: portrait) {
+  .glass::before {
+    background-image: url(bilder/XP.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+}
+
+/* Gilt, wenn das Gerät im Querformat (Landscape) ist */
+@media screen and (orientation: landscape) {
+  .glass::before {
+    background-image: url(bilder/XP.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
 }
