@@ -78,10 +78,6 @@ body.mode-gradient {
   right: 0;
   background-color: rgba(166, 184, 199, 0.2);
   z-index: -1;
-
-  filter: url(#ie-blur); /*Für den Fall, dass nicht mal -webkit-filter: blur(4px) funktioniert*/
-  -webkit-filter: blur(5px);
-  filter: blur(5px);
 }
 
 /* Wenn Body die Klasse hat, schaltet auch das Pseudo-Element auf Gradient um */
