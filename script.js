@@ -7,6 +7,9 @@ pseudo.innerHTML = `
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
+        filter: url(#ie-blur); /*Für den Fall, dass nicht mal -webkit-filter: blur(4px) funktioniert*/
+        -webkit-filter: blur(5px);
+        filter: blur(5px);
     }
 `;
 
@@ -44,6 +47,9 @@ mql.addEventListener("change", function() {
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
+                filter: url(#ie-blur); /*Für den Fall, dass nicht mal -webkit-filter: blur(4px) funktioniert*/
+                -webkit-filter: blur(5px);
+                filter: blur(5px);
             }
         `;
     }, 200);
