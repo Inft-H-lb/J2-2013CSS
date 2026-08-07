@@ -4,17 +4,18 @@ document.head.appendChild(styleTag); //dem Head der HTML Datei wird ein Element 
 styleTag.innerHTML = `
   .glass::before{
   content: "";
-  background-color: #83b9b948;
   position: absolute;
   top: -10px;
   bottom: -10px;
   left: -10px;
   right: -10px;
+  background-color: rgba(166, 184, 199, 0.2);
+
   background-image: url(https://static.giga.de/wp-content/uploads/2019/12/Gruene-Idylle-rcm1680x944u.jpg);
-  -webkit-background-size: cover;
   background-size: cover;
   background-position: center;
-
+  background-attachment: fixed;
+  
   z-index: -1;
   -webkit-filter: blur(4px);
   filter: blur(4px);
@@ -53,21 +54,22 @@ document.addEventListener('keydown', function(event){
             styleTag.innerHTML = `
                 .glass::before{
                     content: "";
-                    background-color: #83b9b948;
                     position: absolute;
                     top: -10px;
                     bottom: -10px;
                     left: -10px;
                     right: -10px;
+                    background-color: rgba(166, 184, 199, 0.2);
+
                     background-image: url(https://static.giga.de/wp-content/uploads/2019/12/Gruene-Idylle-rcm1680x944u.jpg);
-                    -webkit-background-size: cover;
                     background-size: cover;
                     background-position: center;
-
+                    background-attachment: fixed;
+                    
                     z-index: -1;
                     -webkit-filter: blur(4px);
                     filter: blur(4px);
-                }
+                    }
             `;
             document.body.style.backgroundImage = "url(https://static.giga.de/wp-content/uploads/2019/12/Gruene-Idylle-rcm1680x944u.jpg)";
             document.body.style.backgroundSize = "cover";
@@ -78,15 +80,30 @@ document.addEventListener('keydown', function(event){
     } 
 });
 
-window.addEventListener("orientationchange", function() {
-    setTimeout(function() {
-        // Wir suchen die Widgets und "zwingen" den Browser zu einem Re-Layout,
-        // indem wir sie kurz aus dem DOM entfernen und wieder einfügen
-        var containers = document.querySelectorAll('.glass');
-        for (var i = 0; i < containers.length; i++) {
-            var parent = containers[i].parentNode;
-            var element = parent.removeChild(containers[i]);
-            parent.appendChild(element);
+const mql = window.matchMedia("(orientation: portrait)");
+
+mql.addEventListener("change", function(e) {
+    styleTag.innerHTML = '';
+    styleTag.innerHTML = `
+        .glass::before{
+            content: "";
+            position: absolute;
+            top: -10px;
+            bottom: -10px;
+            left: -10px;
+            right: -10px;
+            background-color: rgba(166, 184, 199, 0.2);
+
+            background-image: url(https://static.giga.de/wp-content/uploads/2019/12/Gruene-Idylle-rcm1680x944u.jpg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            
+            z-index: -1;
+            -webkit-filter: blur(4px);
+            filter: blur(4px);
         }
-    }, 300);
-});
+    `;
+
+}
+);
