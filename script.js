@@ -6,6 +6,8 @@ styleTag.innerHTML = `
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  -webkit-filter: blur(4px);
+  filter: blur(4px);
 }
 `;
 
@@ -34,6 +36,8 @@ document.addEventListener('keydown', function(event){
                     background-size: cover;
                     background-position: center;
                     background-attachment: fixed;
+                    -webkit-filter: blur(4px);
+                    filter: blur(4px);
             `;
             document.body.style.backgroundImage = "url(https://static.giga.de/wp-content/uploads/2019/12/Gruene-Idylle-rcm1680x944u.jpg)";
             document.body.style.backgroundSize = "cover";
@@ -55,6 +59,8 @@ mql.addEventListener("change", function(e) {
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
+                -webkit-filter: blur(4px);
+                filter: blur(4px);
             }
         `;
     }, 2000);
