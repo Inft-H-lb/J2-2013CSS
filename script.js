@@ -3,7 +3,7 @@ document.head.appendChild(styleTag); //dem Head der HTML Datei wird ein Element 
 
 styleTag.innerHTML = `
   .glass::before{
-    background-image: url(./bilder/BlurryWindowsXP.jpg);
+    background-image: url(./bilder/BlurXP.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -31,12 +31,12 @@ document.addEventListener('keydown', function(event){
         else{
             styleTag.innerHTML = `
                 .glass::before{
-                    background-image: url(./bilder/BlurryWindowsXP.jpg);
+                    background-image: url(./bilder/BlurXP.jpg);
                     background-size: cover;
                     background-position: center;
                     background-attachment: fixed;
             `;
-            document.body.style.backgroundImage = "url(./bilder/BlurryWindowsXP.jpg)";
+            document.body.style.backgroundImage = "url(./bilder/BlurXP.jpg)";
             document.body.style.backgroundSize = "cover";
             document.body.style.backgroundPosition = "center";
             document.body.style.backgroundAttachment = "fixed";
@@ -52,7 +52,7 @@ mql.addEventListener("change", function(e) {
     setTimeout(function() {
         styleTag.innerHTML = `
             .glass::before{
-                background-image: url(./bilder/BlurryWindowsXP.jpg);
+                background-image: url(./bilder/BlurXP.jpg);
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
