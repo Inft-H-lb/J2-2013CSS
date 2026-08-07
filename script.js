@@ -2,14 +2,11 @@ const pseudo = document.createElement('style');
 document.head.appendChild(pseudo);
 
 pseudo.innerHTML = `
-    .glass::before{
+    .glass_blur{
         background-image: url(bilder/XP.jpg);
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
-        filter: url(#ie-blur); /*Für den Fall, dass nicht mal -webkit-filter: blur(4px) funktioniert*/
-        -webkit-filter: blur(5px);
-        filter: blur(5px);
     }
 `;
 
@@ -42,15 +39,11 @@ mql.addEventListener("change", function() {
     pseudo.innerHTML = "";
     setTimeout(function(){
         pseudo.innerHTML = `
-            .glass::before{
+            .glass_blur{
                 background-image: url(bilder/XP.jpg);
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
-                filter: url(#ie-blur); /*Für den Fall, dass nicht mal -webkit-filter: blur(4px) funktioniert*/
-                -webkit-filter: blur(5px);
-                filter: blur(5px);
-            }
         `;
     }, 200);
 });
