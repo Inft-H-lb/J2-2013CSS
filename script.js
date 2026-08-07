@@ -84,7 +84,7 @@ const mql = window.matchMedia("(orientation: portrait)");
 
 mql.addEventListener("change", function(e) {
     styleTag.innerHTML = '';
-    setTimeout(function() {
+    /*setTimeout(function() {
         styleTag.innerHTML = `
             .glass::before{
                 content: "";
@@ -105,7 +105,7 @@ mql.addEventListener("change", function(e) {
                 filter: blur(4px);
             }
         `;
-    }, 2000);
+    }, 2000);*/
 
 }
 );
