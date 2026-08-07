@@ -2,12 +2,11 @@ const styleTag = document.createElement('style');
 document.head.appendChild(styleTag); //dem Head der HTML Datei wird ein Element <style> hinzugefügt
 
 styleTag.innerHTML = `
+.glass::before{
   background-image: url(https://static.giga.de/wp-content/uploads/2019/12/Gruene-Idylle-rcm1680x944u.jpg);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  -webkit-filter: blur(4px);
-  filter: blur(4px);
 }
 `;
 
@@ -36,8 +35,6 @@ document.addEventListener('keydown', function(event){
                     background-size: cover;
                     background-position: center;
                     background-attachment: fixed;
-                    -webkit-filter: blur(4px);
-                    filter: blur(4px);
             `;
             document.body.style.backgroundImage = "url(https://static.giga.de/wp-content/uploads/2019/12/Gruene-Idylle-rcm1680x944u.jpg)";
             document.body.style.backgroundSize = "cover";
@@ -59,8 +56,6 @@ mql.addEventListener("change", function(e) {
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
-                -webkit-filter: blur(4px);
-                filter: blur(4px);
             }
         `;
     }, 2000);
