@@ -14,7 +14,7 @@ styleTag.innerHTML = `
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+
   z-index: -1;
   -webkit-filter: blur(4px);
   filter: blur(4px);
@@ -63,7 +63,7 @@ document.addEventListener('keydown', function(event){
                     -webkit-background-size: cover;
                     background-size: cover;
                     background-position: center;
-                    background-attachment: fixed;
+
                     z-index: -1;
                     -webkit-filter: blur(4px);
                     filter: blur(4px);
