@@ -4,6 +4,10 @@ document.head.appendChild(styleTag); //dem Head der HTML Datei wird ein Element 
 styleTag.innerHTML = `
   .glass::before{
   content: "";
+  background-color: #83b9b9;
+  opacity: 0.2;
+  background-color: #83b9b9;
+  opacity: 0.2;
   position: absolute;
   top: -10px;
   bottom: -10px;
@@ -28,6 +32,8 @@ document.addEventListener('keydown', function(event){
             styleTag.innerHTML = `
                 .glass::before{
                     content: "";
+                    background-color: #83b9b9;
+                    opacity: 0.2;
                     position: absolute;
                     top: -10px;
                     bottom: -10px;
@@ -51,6 +57,8 @@ document.addEventListener('keydown', function(event){
             styleTag.innerHTML = `
                 .glass::before{
                     content: "";
+                    background-color: #83b9b9;
+                    opacity: 0.2;
                     position: absolute;
                     top: -10px;
                     bottom: -10px;
