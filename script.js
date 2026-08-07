@@ -82,7 +82,7 @@ document.addEventListener('keydown', function(event){
 
 const mql = window.matchMedia("(orientation: portrait)");
 
-mql.addEventListener("change", function(e) {
+/*mql.addEventListener("change", function(e) {
     styleTag.innerHTML = '';
     setTimeout(function() {
         styleTag.innerHTML = `
