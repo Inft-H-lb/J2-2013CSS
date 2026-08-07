@@ -1,9 +1,9 @@
 const styleTag = document.createElement('style');
-document.head.appendChild(styleTag); //dem Head der HTML Datei wird ein Element <style> hinzugefügt
+document.head.appendChild(styleTag);
 
 styleTag.innerHTML = `
   .glass::before{
-    background-image: url(./bilder/BlurXP.jpg);
+    background-image: url("bilder/BlurXP.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -18,7 +18,7 @@ document.addEventListener('keydown', function(event){
             styleTag.innerHTML = `
                 .glass::before{
                     background-image: linear-gradient(
-                    to bottom left,
+                        to bottom left,
                         #439fd4,
                         #445abd,
                         #6d1986
@@ -31,12 +31,14 @@ document.addEventListener('keydown', function(event){
         else{
             styleTag.innerHTML = `
                 .glass::before{
-                    background-image: url(./bilder/BlurXP.jpg);
+                    background-image: url("bilder/BlurXP.jpg");
                     background-size: cover;
                     background-position: center;
                     background-attachment: fixed;
-            `;
-            document.body.style.backgroundImage = "url(./bilder/BlurXP.jpg)";
+                }
+            `; /* <-- Hier fehlte die schließende geschweifte Klammer! */
+            
+            document.body.style.backgroundImage = "url('bilder/BlurXP.jpg')";
             document.body.style.backgroundSize = "cover";
             document.body.style.backgroundPosition = "center";
             document.body.style.backgroundAttachment = "fixed";
@@ -52,13 +54,11 @@ mql.addEventListener("change", function(e) {
     setTimeout(function() {
         styleTag.innerHTML = `
             .glass::before{
-                background-image: url(./bilder/BlurXP.jpg);
+                background-image: url("bilder/BlurXP.jpg");
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
             }
         `;
     }, 2000);
-
-}
-);
+});
