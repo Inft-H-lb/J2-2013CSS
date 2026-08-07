@@ -12,3 +12,16 @@ document.addEventListener('keydown', function(event){
         }
     } 
 });
+
+function reloadCSS() {
+    const linkElement = document.querySelector('link[rel="stylesheet"]');
+    if (linkElement) {
+        // Wir merken uns den href und hängen einen Trick an, damit der Browser es nicht aus dem Cache holt
+        const href = linkElement.href.split('?')[0];
+        linkElement.href = href + '?reload=' + new Date().getTime();
+    }
+}
+
+mql.addEventListener("change", function() {
+    reloadCSS();
+});
