@@ -1,3 +1,16 @@
+const pseudo = document.createElement('style');
+document.head.appendChild(pseudo);
+
+pseudo.innerHTML = `
+    .glass::before{
+        background-image: url(bilder/XP.jpg);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+`;
+
+
 let bg_toggle = 0;
 
 // 1. Umschalten zwischen Bild und Farbverlauf per Taste "b"
@@ -23,5 +36,15 @@ function reloadCSS() {
 }
 
 mql.addEventListener("change", function() {
-    reloadCSS();
+    pseudo.innerHTML = "";
+    setTimeout(function(){
+        pseudo.innerHTML = `
+            .glass::before{
+                background-image: url(bilder/XP.jpg);
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+        `;
+    }, 200);
 });
