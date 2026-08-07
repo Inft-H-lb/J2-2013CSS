@@ -4,10 +4,7 @@ document.head.appendChild(styleTag); //dem Head der HTML Datei wird ein Element 
 styleTag.innerHTML = `
   .glass::before{
   content: "";
-  background-color: #83b9b9;
-  opacity: 0.2;
-  background-color: #83b9b9;
-  opacity: 0.2;
+  background-color: #83b9b948;
   position: absolute;
   top: -10px;
   bottom: -10px;
@@ -32,8 +29,7 @@ document.addEventListener('keydown', function(event){
             styleTag.innerHTML = `
                 .glass::before{
                     content: "";
-                    background-color: #83b9b9;
-                    opacity: 0.2;
+                    background-color: #83b9b948;
                     position: absolute;
                     top: -10px;
                     bottom: -10px;
@@ -57,8 +53,7 @@ document.addEventListener('keydown', function(event){
             styleTag.innerHTML = `
                 .glass::before{
                     content: "";
-                    background-color: #83b9b9;
-                    opacity: 0.2;
+                    background-color: #83b9b948;
                     position: absolute;
                     top: -10px;
                     bottom: -10px;
@@ -85,10 +80,13 @@ document.addEventListener('keydown', function(event){
 
 window.addEventListener("orientationchange", function() {
     setTimeout(function() {
-        var currentCSS = styleTag.innerHTML;
-        styleTag.innerHTML = ""; // Styles komplett löschen
-        setTimeout(function() {
-            styleTag.innerHTML = currentCSS; // Styles neu schreiben
-        }, 50);
-    }, 800);
+        // Wir suchen die Widgets und "zwingen" den Browser zu einem Re-Layout,
+        // indem wir sie kurz aus dem DOM entfernen und wieder einfügen
+        var containers = document.querySelectorAll('.glass');
+        for (var i = 0; i < containers.length; i++) {
+            var parent = containers[i].parentNode;
+            var element = parent.removeChild(containers[i]);
+            parent.appendChild(element);
+        }
+    }, 300);
 });
