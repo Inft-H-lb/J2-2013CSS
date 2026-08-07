@@ -90,5 +90,5 @@ window.addEventListener("orientationchange", function() {
         setTimeout(function() {
             styleTag.innerHTML = currentCSS; // Styles neu schreiben
         }, 50);
-    }, 200);
+    }, 800);
 });
