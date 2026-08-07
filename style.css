@@ -80,9 +80,9 @@ body{
   
   z-index: -1;
 
-  filter: url(#ie-blur); /*Für den Fall, dass nicht mal -webkit-filter: blur(4px) funktioniert*/
+  /*filter: url(#ie-blur); Für den Fall, dass nicht mal -webkit-filter: blur(4px) funktioniert
   -webkit-filter: blur(4px);
-  filter: blur(4px);
+  filter: blur(4px); */
 }
 
 @media screen and (max-height: 300px), (max-width: 300px){
