@@ -82,4 +82,30 @@ document.addEventListener('keydown', function(event){
 
 const mql = window.matchMedia("(orientation: portrait)");
 
-location.reload();
+mql.addEventListener("change", function(e) {
+    styleTag.innerHTML = '';
+    setTimeout(function() {
+        styleTag.innerHTML = `
+            .glass::before{
+                content: "";
+                position: absolute;
+                top: -10px;
+                bottom: -10px;
+                left: -10px;
+                right: -10px;
+                background-color: rgba(166, 184, 199, 0.2);
+
+                background-image: url(https://static.giga.de/wp-content/uploads/2019/12/Gruene-Idylle-rcm1680x944u.jpg);
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+                
+                z-index: -1;
+                -webkit-filter: blur(4px);
+                filter: blur(4px);
+            }
+        `;
+    }, 2000);
+
+}
+);
