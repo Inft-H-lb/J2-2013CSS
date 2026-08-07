@@ -121,31 +121,3 @@ body.mode-gradient .glass::before{
     height: 100%;
   }
 }
-
-/* Gilt, wenn das Gerät im Hochformat (Portrait) ist */
-@media screen and (orientation: portrait) {
-  .glass::before {
-    background-image: none;
-    background-size: none;
-    background-position: none;
-    background-attachment: none;
-    background-image: url(bilder/XP.jpg);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-  }
-}
-
-/* Gilt, wenn das Gerät im Querformat (Landscape) ist */
-@media screen and (orientation: landscape) {
-  .glass::before {
-    background-image: none;
-    background-size: none;
-    background-position: none;
-    background-attachment: none;
-    background-image: url(bilder/XP.jpg);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-  }
-}
