@@ -1,8 +1,17 @@
-const pseudo = document.querySelector(".glass_blur");
-pseudo.style.backgroundImage = "url(bilder/XP.jpg)";
-pseudo.style.backgroundSize = "cover";
-pseudo.style.backgroundPosition = "center";
-pseudo.style.backgroundAttachment = "fixed";
+document.addEventListener("DOMContentLoaded", function() {
+    const elemente = document.querySelectorAll(".glass_blur");
+    
+    console.log("Gefundene Elemente:", elemente.length); // Sollte größer als 0 sein!
+
+    elemente.forEach(pseudo => {
+        pseudo.style.backgroundImage = "url('bilder/XP.jpg')";
+        pseudo.style.backgroundSize = "cover";
+        pseudo.style.backgroundPosition = "center";
+        pseudo.style.backgroundAttachment = "fixed";
+        pseudo.style.webkitFilter = "blur(5px)";
+        pseudo.style.filter = "blur(5px)";
+    });
+});
 
 let bg_toggle = 0;
 
@@ -33,10 +42,16 @@ mql.addEventListener("change", function() {
     pseudo.style.backgroundSize = "none";
     pseudo.style.backgroundPosition = "none";
     pseudo.style.backgroundAttachment = "none";
+    pseudo.style.filter = "none";
+    pseudo.style['-webkit-filter'] = "none";
+    pseudo.style.filter = "none";
     setTimeout(function(){
         pseudo.style.backgroundImage = "url(bilder/XP.jpg)";
         pseudo.style.backgroundSize = "cover";
         pseudo.style.backgroundPosition = "center";
         pseudo.style.backgroundAttachment = "fixed";
+        pseudo.style.filter = "url(#ie-blur)";
+        pseudo.style['-webkit-filter'] = "blur(5px)";
+        pseudo.style.filter = "blur(5px)";
     }, 200);
 });
