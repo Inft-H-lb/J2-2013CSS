@@ -89,14 +89,6 @@ body.mode-gradient {
   right: 0;
   background-color: rgba(166, 184, 199, 0.2);
   z-index: -1;
-
-  background-image: url(bilder/XP.jpg);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-
-  -webkit-filter: blur(5px);
-  filter: blur(5px);
   
 }
 
