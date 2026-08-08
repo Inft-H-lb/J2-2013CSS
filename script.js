@@ -1,15 +1,8 @@
-const pseudo = document.createElement('style');
-document.head.appendChild(pseudo);
-
-pseudo.innerHTML = `
-    .glass_blur{
-        background-image: url(bilder/XP.jpg);
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }
-`;
-
+const pseudo = document.querySelector(".glass_blur");
+pseudo.style.backgroundImage = "url(bilder/XP.jpg)";
+pseudo.style.backgroundSize = "cover";
+pseudo.style.backgroundPosition = "center";
+pseudo.style.backgroundAttachment = "fixed";
 
 let bg_toggle = 0;
 
@@ -36,14 +29,14 @@ function reloadCSS() {
 }
 
 mql.addEventListener("change", function() {
-    pseudo.innerHTML = "";
+    pseudo.style.backgroundImage = "none";
+    pseudo.style.backgroundSize = "none";
+    pseudo.style.backgroundPosition = "none";
+    pseudo.style.backgroundAttachment = "none";
     setTimeout(function(){
-        pseudo.innerHTML = `
-            .glass_blur{
-                background-image: url(bilder/XP.jpg);
-                background-size: cover;
-                background-position: center;
-                background-attachment: fixed;
-        `;
+        pseudo.style.backgroundImage = "url(bilder/XP.jpg)";
+        pseudo.style.backgroundSize = "cover";
+        pseudo.style.backgroundPosition = "center";
+        pseudo.style.backgroundAttachment = "fixed";
     }, 200);
 });
