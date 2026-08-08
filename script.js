@@ -1,20 +1,16 @@
-function update_bg(callback) {
+function update_bg(action) {
     var elemente = document.querySelectorAll(".glass_blur");
     for (var i = 0; i < elemente.length; i++) {
-        callback(elemente[i], i);
+        if (action === "set") {
+            elemente[i].classList.add("active-bg");
+        } else {
+            elemente[i].classList.remove("active-bg");
+        }
     }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Beim Laden anwenden
-    update_bg(function(pseudo) {
-        pseudo.style.backgroundImage = "url('bilder/XP.jpg')";
-        pseudo.style.backgroundSize = "cover";
-        pseudo.style.backgroundPosition = "center";
-        pseudo.style.backgroundAttachment = "fixed";
-        pseudo.style.webkitFilter = "blur(5px)";
-        pseudo.style.filter = "blur(5px)";
-    });
+    update_bg("set");
 });
 
 var bg_toggle = 0;
@@ -33,29 +29,14 @@ document.addEventListener('keydown', function(event){
 
 var mql = window.matchMedia("(min-aspect-ratio: 1/1)");
 
-// Fallback für ältere WebViews: addListener statt addEventListener("change")
 function handleOrientationChange(e) {
-    // Alles auf "none" setzen
-    update_bg(function(pseudo) {
-        pseudo.style.backgroundImage = "none";
-        pseudo.style.backgroundSize = "none";
-        pseudo.style.backgroundPosition = "none";
-        pseudo.style.backgroundAttachment = "none";
-        pseudo.style.filter = "none";
-        pseudo.style.webkitFilter = "none";
-    });
+    // Kurz entfernen, damit das alte WebView das Layout neu berechnen kann
+    update_bg("remove");
 
-    // Nach 200ms wieder neu setzen
+    // 400ms Verzögerung geben dem alten Fully Kiosk Zeit zum Drehen
     setTimeout(function(){
-        update_bg(function(pseudo) {
-            pseudo.style.backgroundImage = "url('bilder/XP.jpg')";
-            pseudo.style.backgroundSize = "cover";
-            pseudo.style.backgroundPosition = "center";
-            pseudo.style.backgroundAttachment = "fixed";
-            pseudo.style.webkitFilter = "blur(5px)";
-            pseudo.style.filter = "blur(5px)";
-        });
-    }, 200);
+        update_bg("set");
+    }, 400);
 }
 
 if (mql.addListener) {
