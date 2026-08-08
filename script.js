@@ -1,9 +1,13 @@
-document.addEventListener("DOMContentLoaded", function() {
+function update_bg(callback) {
     const elemente = document.querySelectorAll(".glass_blur");
-    
-    console.log("Gefundene Elemente:", elemente.length); // Sollte größer als 0 sein!
+    for (let i = 0; i < elemente.length; i++) {
+        callback(elemente[i], i);
+    }
+}
 
-    elemente.forEach(pseudo => {
+document.addEventListener("DOMContentLoaded", function() {
+    // Beim Laden anwenden
+    update_bg(function(pseudo) {
         pseudo.style.backgroundImage = "url('bilder/XP.jpg')";
         pseudo.style.backgroundSize = "cover";
         pseudo.style.backgroundPosition = "center";
@@ -15,9 +19,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 let bg_toggle = 0;
 
-// 1. Umschalten zwischen Bild und Farbverlauf per Taste "b"
 document.addEventListener('keydown', function(event){
-    if(event.key === "b"){
+    if(event.keyCode === 66){
         if(bg_toggle == 0){
             document.body.className = "mode-gradient";
             bg_toggle = 1;
@@ -28,30 +31,29 @@ document.addEventListener('keydown', function(event){
     } 
 });
 
-function reloadCSS() {
-    const linkElement = document.querySelector('link[rel="stylesheet"]');
-    if (linkElement) {
-        // Wir merken uns den href und hängen einen Trick an, damit der Browser es nicht aus dem Cache holt
-        const href = linkElement.href.split('?')[0];
-        linkElement.href = href + '?reload=' + new Date().getTime();
-    }
-}
+const mql = window.matchMedia("(min-aspect-ratio: 1/1)");
 
 mql.addEventListener("change", function() {
-    pseudo.style.backgroundImage = "none";
-    pseudo.style.backgroundSize = "none";
-    pseudo.style.backgroundPosition = "none";
-    pseudo.style.backgroundAttachment = "none";
-    pseudo.style.filter = "none";
-    pseudo.style['-webkit-filter'] = "none";
-    pseudo.style.filter = "none";
+    // Alles auf "none" setzen
+    update_bg(function(pseudo) {
+        pseudo.style.backgroundImage = "none";
+        pseudo.style.backgroundSize = "none";
+        pseudo.style.backgroundPosition = "none";
+        pseudo.style.backgroundAttachment = "none";
+        pseudo.style.filter = "none";
+        pseudo.style['-webkit-filter'] = "none";
+    });
+
+    // Nach 200ms wieder neu setzen
     setTimeout(function(){
-        pseudo.style.backgroundImage = "url(bilder/XP.jpg)";
-        pseudo.style.backgroundSize = "cover";
-        pseudo.style.backgroundPosition = "center";
-        pseudo.style.backgroundAttachment = "fixed";
-        pseudo.style.filter = "url(#ie-blur)";
-        pseudo.style['-webkit-filter'] = "blur(5px)";
-        pseudo.style.filter = "blur(5px)";
+        update_bg(function(pseudo) {
+            pseudo.style.backgroundImage = "url(bilder/XP.jpg)";
+            pseudo.style.backgroundSize = "cover";
+            pseudo.style.backgroundPosition = "center";
+            pseudo.style.backgroundAttachment = "fixed";
+            pseudo.style.filter = "url(#ie-blur)";
+            pseudo.style.webkitFilter = "blur(5px)";
+            pseudo.style.filter = "blur(5px)";
+        });
     }, 200);
 });
