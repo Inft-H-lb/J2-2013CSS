@@ -90,11 +90,6 @@ body.mode-gradient {
   background-color: rgba(166, 184, 199, 0.2);
   z-index: -1;
 
-  background-image: url(bilder/XP.jpg);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-
   filter: url(#ie-blur); /*Für den Fall, dass nicht mal -webkit-filter: blur(4px) funktioniert*/
   -webkit-filter: blur(5px);
   filter: blur(5px);
