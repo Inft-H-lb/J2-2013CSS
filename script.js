@@ -1,6 +1,6 @@
 function update_bg(callback) {
-    const elemente = document.querySelectorAll(".glass_blur");
-    for (let i = 0; i < elemente.length; i++) {
+    var elemente = document.querySelectorAll(".glass_blur");
+    for (var i = 0; i < elemente.length; i++) {
         callback(elemente[i], i);
     }
 }
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-let bg_toggle = 0;
+var bg_toggle = 0;
 
 document.addEventListener('keydown', function(event){
     if(event.keyCode === 66){
@@ -31,9 +31,10 @@ document.addEventListener('keydown', function(event){
     } 
 });
 
-const mql = window.matchMedia("(min-aspect-ratio: 1/1)");
+var mql = window.matchMedia("(min-aspect-ratio: 1/1)");
 
-mql.addEventListener("change", function() {
+// Fallback für ältere WebViews: addListener statt addEventListener("change")
+function handleOrientationChange(e) {
     // Alles auf "none" setzen
     update_bg(function(pseudo) {
         pseudo.style.backgroundImage = "none";
@@ -41,19 +42,24 @@ mql.addEventListener("change", function() {
         pseudo.style.backgroundPosition = "none";
         pseudo.style.backgroundAttachment = "none";
         pseudo.style.filter = "none";
-        pseudo.style['-webkit-filter'] = "none";
+        pseudo.style.webkitFilter = "none";
     });
 
     // Nach 200ms wieder neu setzen
     setTimeout(function(){
         update_bg(function(pseudo) {
-            pseudo.style.backgroundImage = "url(bilder/XP.jpg)";
+            pseudo.style.backgroundImage = "url('bilder/XP.jpg')";
             pseudo.style.backgroundSize = "cover";
             pseudo.style.backgroundPosition = "center";
             pseudo.style.backgroundAttachment = "fixed";
-            pseudo.style.filter = "url(#ie-blur)";
             pseudo.style.webkitFilter = "blur(5px)";
             pseudo.style.filter = "blur(5px)";
         });
     }, 200);
-});
+}
+
+if (mql.addListener) {
+    mql.addListener(handleOrientationChange);
+} else if (mql.addEventListener) {
+    mql.addEventListener("change", handleOrientationChange);
+}
