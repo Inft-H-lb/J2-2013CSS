@@ -1,44 +1,40 @@
-var bg_toggle = 0;
+// Funktion zum Setzen des Bildes
+function applyImageStyles(element) {
+    element.style.backgroundImage = "url('bilder/XP.jpg')";
+    element.style.backgroundSize = "cover";
+    element.style.backgroundPosition = "center";
+    element.style.backgroundAttachment = "fixed";
+}
 
-document.addEventListener('keydown', function(event){
-    if(event.keyCode === 66){
-        if(bg_toggle == 0){
-            document.body.className = "mode-gradient";
-            bg_toggle = 1;
-        } else {
-            document.body.className = "";
-            bg_toggle = 0;
-        }
-    } 
+// 1. Initialer Zustand: Beim ersten Laden direkt setzen
+document.addEventListener("DOMContentLoaded", function() {
+    var elemente = document.querySelectorAll(".glass_blur");
+    for (var i = 0; i < elemente.length; i++) {
+        applyImageStyles(elemente[i]);
+    }
 });
 
 var mql = window.matchMedia("(min-aspect-ratio: 1/1)");
 
-// Die Logik für das Drehen
 function handleOrientationChange(e) {
     var elemente = document.querySelectorAll(".glass_blur");
 
-    // 1. Sofort beim Drehen: Bild ausknipsen, damit das falsch skalierte Bild verschwindet
+    // 1. Bild kurz löschen
     for (var i = 0; i < elemente.length; i++) {
-        elemente[i].classList.add("glass_hide_bg");
-        
-        // Falls vorher schon mal gedreht wurde, die Ausweichklasse kurz wieder entfernen
-        elemente[i].classList.remove("glass_blur_recalc");
+        elemente[i].style.backgroundImage = "none";
     }
 
-    // 2. Dem Gerät kurz Zeit geben, das neue Layout (Breite/Höhe) zu berechnen
+    // 2. Warten, bis die Drehung vollzogen ist
     setTimeout(function(){
         for (var j = 0; j < elemente.length; j++) {
-            // Verstecken aufheben
-            elemente[j].classList.remove("glass_hide_bg");
-            
-            // 3. Ausweichklasse anwenden: Der Browser WIRD gezwungen, das Bild neu zu berechnen
-            elemente[j].classList.add("glass_blur_recalc");
+            // 3. Bild JETZT erst in das Element injizieren
+            // Da das CSS-File davon nichts weiß, MUSS der Browser
+            // das Bild bei dieser Anweisung neu berechnen.
+            applyImageStyles(elemente[j]);
         }
-    }, 300); // 300ms sind bei alten Tablets oft sicherer als 200ms
+    }, 400); 
 }
 
-// Kompatibilität für alte WebViews
 if (mql.addListener) {
     mql.addListener(handleOrientationChange);
 } else if (mql.addEventListener) {
