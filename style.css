@@ -66,8 +66,8 @@ body.mode-gradient {
         inset 0px 5px 10px rgba(255, 255, 255, 0.2);
 }
 
-/* 1. START-KLASSE: Perfekter Zustand beim ersten Laden */
-.glass_blur {
+.glass::before {
+  content: "";
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -76,26 +76,8 @@ body.mode-gradient {
   top: 0; bottom: 0; left: 0; right: 0;
   z-index: -1;
   background-color: rgba(166, 184, 199, 0.2);
-  
-  /* WICHTIG: Kein background-image hier! */
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  -webkit-filter: blur(5px);
-  filter: blur(5px);
 }
 
-/* Wenn Body die Klasse hat, schaltet auch das Pseudo-Element auf Gradient um */
-body.mode-gradient .glass_blur{
-  background-image: linear-gradient(
-    to bottom left,
-    #439fd4,
-    #445abd,
-    #6d1986
-  ) !important;
-  -webkit-filter: none !important;
-  filter: none !important;
-}
 
 @media screen and (max-height: 300px), (max-width: 300px){
   body{
