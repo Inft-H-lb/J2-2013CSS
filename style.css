@@ -3,7 +3,7 @@ document.head.appendChild(pseudo);
 
 pseudo.innerHTML = `
     .glass::before{
-        background-image: url('https://www.meisterdrucke.com/kunstwerke/1260px/Claude_Monet_-_Westminster_tower_-_%28MeisterDrucke-1117674%29.jpg');
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Claude_Monet_-_The_Houses_of_Parliament%2C_London_%28Metropolitan_Museum_of_Art%29.jpg/1920px-Claude_Monet_-_The_Houses_of_Parliament%2C_London_%28Metropolitan_Museum_of_Art%29.jpg');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
