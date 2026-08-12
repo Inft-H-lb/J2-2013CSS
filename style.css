@@ -89,6 +89,10 @@ body{
     height: 100%;
     float: right;
   }
+
+  body{
+    background-image: linear-gradient(to bottom left, rgb(12, 39, 74), rgb(74, 12, 38));
+  }
 }
 
 @media (min-width: 1000px) {
