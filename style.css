@@ -73,6 +73,7 @@ body{
   overflow-x: scroll;
   overflow-y: hidden;
   
+  border-radius: 40px;
   border-radius: inherit;
 
   line-height: 100%;
@@ -117,6 +118,10 @@ body{
   }
 
   .glass{
+    border-radius: 15px;
+  }
+
+  .main_scroll{
     border-radius: 15px;
   }
 }
