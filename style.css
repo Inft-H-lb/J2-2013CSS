@@ -84,6 +84,9 @@ body{
   text-align: center;
 
   padding: 10px;
+
+  touch-action: pan-x;
+  -ms-touch-action: pan-x;
 }
 
 .main_scroll::-webkit-scrollbar{
@@ -104,6 +107,7 @@ body{
 
   display: inline-block;
   vertical-align: middle;
+
 }
 
 #first_main_icon{
