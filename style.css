@@ -73,6 +73,7 @@ body{
   overflow-x: scroll;
   overflow-y: hidden;
   scrollbar-width: 0px;
+
   border-radius: 40px;
   border-radius: inherit;
 
@@ -84,6 +85,10 @@ body{
   text-align: center;
 
   padding: 10px;
+}
+
+.main_scroll::-webkit-scrollbar{
+  display: none;
 }
 
 .icon{
