@@ -91,6 +91,7 @@ body{
 
 .main_scroll::-webkit-scrollbar{
   display: none;
+  width: 0%;
 }
 
 .icon{
@@ -174,6 +175,9 @@ body{
   .main_scroll{
     overflow-x: hidden;
     overflow-y: auto;
+
+    touch-action: pan-y;
+    -ms-touch-action: pan-y;
   }
 }
 
