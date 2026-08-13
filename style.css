@@ -76,7 +76,7 @@ body{
   border-radius: 40px;
   border-radius: inherit;
 
-  line-height: 90%;
+  line-height: 100%;
   white-space: nowrap;
 
   align-content: center;
@@ -98,8 +98,8 @@ body{
   justify-self: center;
   background-color: red;
 
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 0;
   margin-left: 0;
   margin-right: 10px;
 
@@ -158,8 +158,8 @@ body{
 
     margin-top: 0;
     margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 0;
+    margin-right: 0;
 
     display: block;
   }
