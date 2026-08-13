@@ -83,7 +83,7 @@ body{
   justify-content: center;
   text-align: center;
 
-  padding: 0px;
+  padding: 10px;
 
   touch-action: pan-x;
   -ms-touch-action: pan-x;
