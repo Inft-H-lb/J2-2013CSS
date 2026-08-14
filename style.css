@@ -70,7 +70,7 @@ body{
 
 .main_scroll{
   width: 98%;
-  height: 80%;
+  height: 8vh;
 
   overflow-x: scroll;
   overflow-y: hidden;
@@ -93,7 +93,7 @@ body{
 
 .icon{
   width: 8vh;
-  height: 8vh;
+  height: 100%;
   align-self: center;
   justify-self: center;
   background-color: red;
