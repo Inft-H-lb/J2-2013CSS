@@ -54,8 +54,6 @@ body{
 
   justify-content: center;
   align-content: center;
-
-  padding: 10px;
 }
 
 .glass::before{
@@ -69,8 +67,8 @@ body{
 }
 
 .main_scroll{
-  width: 98%;
-  height: 8vh;
+  width: 100%;
+  height: 100%;
 
   overflow-x: scroll;
   overflow-y: hidden;
@@ -84,6 +82,8 @@ body{
   align-content: center;
   justify-content: center;
   text-align: center;
+
+  padding: 10px;
 }
 
 .main_scroll::-webkit-scrollbar{
@@ -172,9 +172,6 @@ body{
   .main_scroll{
     overflow-x: hidden;
     overflow-y: auto;
-
-    width: 8vh;
-    height: 100%;
   }
 }
 
