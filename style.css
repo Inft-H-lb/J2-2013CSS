@@ -54,6 +54,8 @@ body{
 
   justify-content: center;
   align-content: center;
+
+  padding: 10px;
 }
 
 .glass::before{
@@ -82,8 +84,6 @@ body{
   align-content: center;
   justify-content: center;
   text-align: center;
-
-  padding: 10px;
 }
 
 .main_scroll::-webkit-scrollbar{
