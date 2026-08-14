@@ -172,6 +172,9 @@ body{
   .main_scroll{
     overflow-x: hidden;
     overflow-y: auto;
+
+    width: 8vh;
+    height: 100%;
   }
 }
 
