@@ -66,21 +66,33 @@ body{
   pointer-events: none;
 }
 
-.main_scroll {
-    width: 100%;
-    height: 8vh;
+.main_positioner{
+  width: 100%;
+  height: 8vh;
 
-    overflow-x: scroll;
-    overflow-y: hidden;
+  border-radius: 40px;      /*Nur falls inherit nicht geht*/
+  border-radius: inherit;
 
-    border-radius: inherit;
+  align-self: center;
+  justify-self: center;
+}
 
-    line-height: 8vh;
-    white-space: nowrap;
+.main_scroll{
+  width: 100%;
+  height: 100%;
 
-    text-align: left;
+  overflow-x: scroll;
+  overflow-y: hidden;
 
-    padding: 0;
+  border-radius: 40px;
+  border-radius: inherit;
+
+  line-height: 100%;
+  white-space: nowrap;
+
+  align-content: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .main_scroll::-webkit-scrollbar{
@@ -88,19 +100,21 @@ body{
   width: 0%;
 }
 
-.icon {
-    width: 8vh;
-    height: 8vh;
+.icon{
+  width: 8vh;
+  height: 100%;
+  align-self: center;
+  justify-self: center;
+  background-color: red;
 
-    background-color: red;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 10px;
 
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 10px;
+  display: inline-block;
+  vertical-align: middle;
 
-    display: inline-block;
-    vertical-align: middle;
 }
 
 #first_main_icon{
@@ -145,14 +159,16 @@ body{
     background-image: linear-gradient(to bottom left, rgb(12, 39, 74), rgb(74, 12, 38));
   }
 
-  .icon {
-    width: 8vw;
+  .icon{
+    width: 100%;
     height: 8vw;
+
+    position: relative;
 
     margin-top: 0;
     margin-bottom: 10px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
 
     display: block;
   }
@@ -162,19 +178,14 @@ body{
     margin-top: 10px;
   }
 
-  .main_scroll {
-    overflow-x: hidden;
-    overflow-y: auto;
-
+  .main_positioner{
     width: 8vw;
     height: 100%;
+  }
 
-    line-height: normal;
-    white-space: normal;
-
-    text-align: center;
-
-    padding: 0;
+  .main_scroll{
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }
 
