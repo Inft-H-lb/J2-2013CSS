@@ -69,7 +69,7 @@ body::-webkit-scrollbar{
 }
 
 .main_scroll{
-  width: 80%;
+  width: 99%;
 
   overflow-x: scroll;
   overflow-y: hidden;
@@ -177,9 +177,6 @@ body::-webkit-scrollbar{
   .main_scroll{
     overflow-x: hidden;
     overflow-y: auto;
-
-    width: auto;
-    height: 80%;
   }
 }
 
