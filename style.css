@@ -178,6 +178,7 @@ body::-webkit-scrollbar{
     overflow-x: hidden;
     overflow-y: auto;
 
+    width: auto;
     height: 80%;
   }
 }
