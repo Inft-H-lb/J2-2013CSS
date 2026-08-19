@@ -74,9 +74,6 @@ body::-webkit-scrollbar{
   overflow-x: scroll;
   overflow-y: hidden;
 
-  border-radius: 40px;
-  border-radius: inherit;
-
   line-height: 100%;
   white-space: nowrap;
   text-align: center;
@@ -132,10 +129,6 @@ body::-webkit-scrollbar{
   .glass{
     border-radius: 15px;
   }
-
-  .main_scroll{
-    border-radius: 15px;
-  }
 }
 
 @media (min-aspect-ratio: 1/1) {
@@ -178,7 +171,7 @@ body::-webkit-scrollbar{
     overflow-x: hidden;
     overflow-y: auto;
 
-    width: auto;
+    width: 100%;
     height: 80%;
   }
 }
