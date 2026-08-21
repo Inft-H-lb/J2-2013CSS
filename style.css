@@ -159,10 +159,7 @@ body::-webkit-scrollbar{
     margin-left: 0;
     margin-right: 0;
 
-    left: calc((12.5vw - 8vw) /2);
-    transform: translate(calc((12.5vw - 8vw)/-2), 0);
-
-    display: block; 
+    display: inline-block; 
     vertical-align: middle;
   }
 
@@ -183,7 +180,7 @@ body::-webkit-scrollbar{
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 
-    display: block;
+    display: inline-block;
     white-space: normal;
     text-align: center;
   }
