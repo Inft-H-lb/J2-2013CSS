@@ -149,7 +149,7 @@ body::-webkit-scrollbar{
   }
 
   .icon{
-    width: 8vw;
+    width: 80%;
     height: 8vw;
 
     position: relative;
