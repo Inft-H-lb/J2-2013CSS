@@ -159,6 +159,9 @@ body::-webkit-scrollbar{
     margin-left: 0;
     margin-right: 0;
 
+    left: calc((12.5vw - 8vw) /2);
+    transform: translate(calc((12.5vw - 8vw)/-2), 0);
+
     display: block; 
     vertical-align: middle;
   }
