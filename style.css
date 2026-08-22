@@ -94,11 +94,11 @@ body::-webkit-scrollbar{
 }
 
 .icon{
-  width: 8vh;
-  height: 8vh;
+  width: 7vh;
+  height: 7vh;
   align-self: center;
   justify-self: center;
-  background-color: red;
+
 
   margin-top: 0;
   margin-bottom: 0;
@@ -108,6 +108,41 @@ body::-webkit-scrollbar{
   display: inline-block;
   vertical-align: middle;
 
+}
+
+.temperature{
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(./bilder/temp.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.led{
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(./bilder/led.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.music{
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(./bilder/music.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.todo{
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(./bilder/todo.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.settings{
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(./bilder/settings.png);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #first_main_icon{
@@ -149,23 +184,26 @@ body::-webkit-scrollbar{
   }
 
   .icon{
-    width: 8vw;
-    height: 8vw;
-
-    position: relative;
+    width: 7vw;
+    height: 7vw;
 
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     margin-left: 0;
     margin-right: 0;
 
     display: inline-block; 
     vertical-align: middle;
+    text-align: center;
   }
 
   #first_main_icon{
     margin-left: 0;
-    margin-top: 10px;
+    margin-top: 0px;
+  }
+
+  #last_main_icon{
+    margin-bottom: 0px;
   }
 
   .main_scroll{
@@ -173,7 +211,7 @@ body::-webkit-scrollbar{
     overflow-y: auto;
 
     width: 100%;
-    height: 80%;
+    height: 90%;
 
     top: 50%;
     left: 50%;
