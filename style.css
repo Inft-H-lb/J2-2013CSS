@@ -191,8 +191,24 @@ body::-webkit-scrollbar{
 @media (max-aspect-ratio: 1/1) {
   @media (max-height: 750px) {
     .icon{
+        background-image: none;
         box-shadow: none;
         padding: 3px;
+    }
+    .led{
+      background-image: url(./bilder/led.png);
+    }
+    .music{
+      background-image: url(./bilder/music.png);
+    }
+    .settings{
+      background-image: url(./bilder/settings.png);
+    }
+    .temperature{
+      background-image: url(./bilder/temp.png);
+    }
+    .todo{
+      background-image: url(./bilder/todo.png);
     }
 }
 }
@@ -201,6 +217,7 @@ body::-webkit-scrollbar{
 
   @media (max-width: 750px){
     .icon{
+        background-image: none;
         box-shadow: none;
         padding: 3px;
     }
