@@ -172,7 +172,7 @@ body::-webkit-scrollbar{
   margin-top: 0;
 }
 
-@media screen and (max-height: 300px), (max-width: 300px){
+@media (max-height: 300px), (max-width: 300px){
   body{
     padding-top: 5px;
     padding-left: 5px;
@@ -188,8 +188,8 @@ body::-webkit-scrollbar{
   }
 }
 
-@media screen and (min-height: 1px){
-  @media screen and (min-width: 1px){
+@media (min-height: 1px){
+  @media (min-width: 1px){
     body{
       background-image: none !important;
       background-color: red;
@@ -198,7 +198,7 @@ body::-webkit-scrollbar{
 }
 
 
-@media screen and (max-aspect-ratio: 1/1) {
+@media (max-aspect-ratio: 1/1) {
   @media (max-height: 600px) {
     .icon{
         box-shadow: none;
@@ -207,15 +207,15 @@ body::-webkit-scrollbar{
 }
 }
 
-@media screen and (min-aspect-ratio: 1/1) {
+@media (min-aspect-ratio: 1/1) {
 
-  @media screen and (max-width: 600px){
+  @media (max-width: 600px){
     .icon{
         box-shadow: none;
         padding: 3px;
     }
   }
-  @media screen and (max-height: 100px){
+  @media (max-height: 100px){
     .icon{
         box-shadow: none;
         padding: 10px;
@@ -279,7 +279,7 @@ body::-webkit-scrollbar{
   }
 }
 
-@media screen and (min-width: 960px) {
+@media (min-width: 960px) {
   .main_widget {
     width: 120px;
     height: 100%;
@@ -296,7 +296,7 @@ body::-webkit-scrollbar{
   }
 }
 
-@media screen and (min-height: 960px) {
+@media (min-height: 960px) {
   .main_widget {
     width: 100%;
     height: 120px;
