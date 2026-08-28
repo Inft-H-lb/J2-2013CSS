@@ -191,24 +191,42 @@ body::-webkit-scrollbar{
 @media (max-aspect-ratio: 1/1) {
   @media (max-height: 750px) {
     .icon{
-        background-image: none;
         box-shadow: none;
         padding: 3px;
+        border-radius: 0px;
     }
-    .led{
+    .Xled{
       background-image: url(./bilder/led.png);
+      background-size: cover;
+      background-repeat: no-repeat;
     }
-    .music{
+    .Xmusic{
       background-image: url(./bilder/music.png);
+      background-size: cover;
+      background-repeat: no-repeat;
     }
-    .settings{
+    .Xsettings{
       background-image: url(./bilder/settings.png);
+      background-size: cover;
+      background-repeat: no-repeat;
     }
-    .temperature{
+    .Xtemperature{
       background-image: url(./bilder/temp.png);
+      background-size: cover;
+      background-repeat: no-repeat;
     }
-    .todo{
+    .Xtodo{
       background-image: url(./bilder/todo.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .led,
+    .music,
+    .settings,
+    .temperature,
+    .todo{
+      background-image: none;
     }
 }
 }
@@ -217,15 +235,50 @@ body::-webkit-scrollbar{
 
   @media (max-width: 750px){
     .icon{
-        background-image: none;
         box-shadow: none;
         padding: 3px;
+        border-radius: 0px;
     }
+    .Xled{
+      background-image: url(./bilder/led.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .Xmusic{
+      background-image: url(./bilder/music.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .Xsettings{
+      background-image: url(./bilder/settings.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .Xtemperature{
+      background-image: url(./bilder/temp.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .Xtodo{
+      background-image: url(./bilder/todo.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .led,
+    .music,
+    .settings,
+    .temperature,
+    .todo{
+      background-image: none;
+    }
+
   }
   @media (max-height: 100px){
     .icon{
         box-shadow: none;
         padding: 10px;
+        border-radius: 0px;
     }
   }
 
