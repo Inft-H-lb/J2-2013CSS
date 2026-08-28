@@ -100,8 +100,8 @@ body::-webkit-scrollbar{
 }
 
 .icon{
-  width: 9vh;
-  height: 9vh;
+  width: 8vh;
+  height: 8vh;
   align-self: center;
   justify-self: center;
 
@@ -303,8 +303,8 @@ body::-webkit-scrollbar{
   }
 
   .icon{
-    width: 9vw;
-    height: 9vw;
+    width: 8vw;
+    height: 8vw;
 
     margin-top: 0;
     margin-bottom: 20px;
@@ -355,8 +355,8 @@ body::-webkit-scrollbar{
   }
 
   .icon{
-    width: 86px;
-    height: 86px;
+    width: 77px;
+    height: 77px;
   }
 }
 
@@ -372,7 +372,7 @@ body::-webkit-scrollbar{
   }
 
   .icon{
-    width: 86px;
-    height: 86px;
+    width: 77px;
+    height: 77px;
   }
 }
