@@ -189,10 +189,7 @@ body::-webkit-scrollbar{
 }
 
 @media (max-aspect-ratio: 1/1) {
-  @media (max-height: 600px) {
-    .glass{
-      background-color: red;
-    }
+  @media (max-height: 750px) {
     .icon{
         box-shadow: none;
         padding: 3px;
@@ -202,10 +199,7 @@ body::-webkit-scrollbar{
 
 @media (min-aspect-ratio: 1/1) {
 
-  @media (max-width: 600px){
-    .glass{
-      background-color: blue;
-    }
+  @media (max-width: 750px){
     .icon{
         box-shadow: none;
         padding: 3px;
