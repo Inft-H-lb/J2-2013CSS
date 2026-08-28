@@ -51,7 +51,7 @@ body::-webkit-scrollbar{
   overflow: hidden;
   width: 100%;
   height: 100%;
-  border-radius: 40px;
+  border-radius: 6vh;
 
   /*KI Lösung, damit sogar Android 4.4.1 die ecken richtig abschneidet*/
   -webkit-mask-image: -webkit-radial-gradient(white, black);
@@ -186,10 +186,6 @@ body::-webkit-scrollbar{
     padding-bottom: 5px;
     padding-right: 5px;
   }
-
-  .glass{
-    border-radius: 15px;
-  }
 }
 
 @media (max-aspect-ratio: 1/1) {
@@ -286,6 +282,10 @@ body::-webkit-scrollbar{
     }
   }
 
+  .glass{
+    border-radius: 6vw;
+  }
+
   .main_widget {
     width: 12.5%;
     height: 100%;
@@ -343,36 +343,48 @@ body::-webkit-scrollbar{
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 850px) {
   .main_widget {
-    width: 120px;
+    width: 106px;
     height: 100%;
   }
 
   .container_widget{
-    width: calc(100% - 120px);
+    width: calc(100% - 106px);
     height: 100%;
   }
 
   .icon{
-    width: 77px;
-    height: 77px;
+    width: 68px;
+    height: 68px;
   }
 }
 
-@media (min-height: 960px) {
+@media (min-height: 850px) {
   .main_widget {
     width: 100%;
-    height: 120px;
+    height: 106px;
   }
 
   .container_widget{
     width: 100%;
-    height: calc(100% - 120px);
+    height: calc(100% - 106px);
   }
 
   .icon{
-    width: 77px;
-    height: 77px;
+    width: 68px;
+    height: 68px;
+  }
+}
+
+@media screen and (max-height: 200px) {
+  .glass{
+    border-radius: 30px;
+  }
+}
+
+@media screen and (max-height: 100px){
+  .glass{
+    border-radius: 10px;
   }
 }
