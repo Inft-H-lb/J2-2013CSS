@@ -188,13 +188,18 @@ body::-webkit-scrollbar{
   }
 }
 
+@media screen and (min-height: 1px){
+  @media screen and (min-width: 1px){
+    body{
+      background-image: none;
+      background-color: red;
+    }
+  }
+}
+
 
 @media screen and (max-aspect-ratio: 1/1) {
   @media (max-height: 600px) {
-    body{
-      background-color: red;
-      background-image: none;
-    }
     .icon{
         box-shadow: none;
         padding: 3px;
