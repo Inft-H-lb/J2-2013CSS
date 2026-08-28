@@ -188,16 +188,6 @@ body::-webkit-scrollbar{
   }
 }
 
-@media (min-height: 1px){
-  @media (min-width: 1px){
-    body{
-      background-image: none !important;
-      background-color: red;
-    }
-  }
-}
-
-
 @media (max-aspect-ratio: 1/1) {
   @media (max-height: 600px) {
     .icon{
