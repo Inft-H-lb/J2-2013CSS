@@ -13,7 +13,7 @@ body{
   padding-left: 10px;
 
   background-color: rgb(30, 84, 111);
-  background-image: linear-gradient(to bottom right, rgb(12, 39, 74), rgb(38, 103, 97));
+  background-image: linear-gradient(to top right, rgb(0, 32, 60), rgb(41, 123, 158));
 }
 
 body::-webkit-scrollbar{
@@ -59,18 +59,27 @@ body::-webkit-scrollbar{
 
   background-color: rgba(176, 176, 176, 0.00);
   box-shadow:
-        inset -3px 0px 10px rgba(255, 255, 255, 0.2),
-        inset 0px 5px 10px rgba(255, 255, 255, 0.2);
+        inset -10px 0px 10px rgba(255, 255, 255, 0.2),
+        inset 0px 10px 10px rgba(255, 255, 255, 0.2);
 }
 
 .glass::before{
   content: "";
   position: absolute;
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(164, 235, 255, 0.1);
   border-radius: inherit;
+
   top: 0; right: 0; bottom: 0; left: 0;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
 
   pointer-events: none;
+
+  box-shadow:
+        inset 15px 0px 15px rgba(24, 72, 91, 0.25),
+        inset 0px -15px 15px rgba(24, 72, 91, 0.25);
 }
 
 .main_scroll{
@@ -295,7 +304,7 @@ body::-webkit-scrollbar{
   }
 
   body{
-    background-image: linear-gradient(to bottom left, rgb(12, 39, 74), rgb(38, 103, 97));
+    background-image: linear-gradient(to top left, rgb(0, 32, 60), rgb(41, 123, 158));
   }
 
   .icon{
