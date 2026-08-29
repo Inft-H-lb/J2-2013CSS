@@ -12,7 +12,8 @@ body{
   padding-top: 10px;
   padding-left: 10px;
 
-  background-image: linear-gradient(to bottom right, rgb(12, 39, 74), rgb(74, 12, 38));
+  background-color: rgb(30, 84, 111);
+  background-image: linear-gradient(to bottom right, rgb(12, 39, 74), rgb(38, 103, 97));
 }
 
 body::-webkit-scrollbar{
@@ -294,7 +295,7 @@ body::-webkit-scrollbar{
   }
 
   body{
-    background-image: linear-gradient(to bottom left, rgb(12, 39, 74), rgb(74, 12, 38));
+    background-image: linear-gradient(to bottom left, rgb(12, 39, 74), rgb(38, 103, 97));
   }
 
   .icon{
