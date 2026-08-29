@@ -65,7 +65,7 @@ body::-webkit-scrollbar{
 .glass::before{
   content: "";
   position: absolute;
-  border-radius: inherit;
+  border-radius: 6vh;
   top: 0; right: 0; bottom: 0; left: 0;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
 
@@ -75,7 +75,7 @@ body::-webkit-scrollbar{
 .main_scroll{
   width: 100%;
 
-  border-radius: inherit;
+  border-radius: 6vh;
 
   overflow-x: scroll;
   overflow-y: hidden;
@@ -104,7 +104,6 @@ body::-webkit-scrollbar{
   height: 8vh;
   align-self: center;
   justify-self: center;
-
 
   margin-top: 0;
   margin-bottom: 0;
@@ -282,7 +281,9 @@ body::-webkit-scrollbar{
     }
   }
 
-  .glass{
+  .glass,
+  .glass::before,
+  .main_scroll{
     border-radius: 6vw;
   }
 
@@ -378,13 +379,17 @@ body::-webkit-scrollbar{
 }
 
 @media screen and (max-height: 200px) {
-  .glass{
+  .glass,
+  .glass::before,
+  .main_scroll{
     border-radius: 30px;
   }
 }
 
 @media screen and (max-height: 100px){
-  .glass{
+  .glass,
+  .glass::before,
+  .main_scroll{
     border-radius: 10px;
   }
 }
