@@ -2,16 +2,24 @@
   box-sizing: border-box;
 }
 
-.test_red{
+.test_red,
+.test_green,
+.test_orange{
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
+    border-radius: inherit;
+}
+
+.test_red{
     border-color: red;
 }
 
 .test_green{
-    border-style: solid;
-    border-width: 1px;
     border-color: green;
+}
+
+.test_orange{
+    border-color: orange;
 }
 
 .center{
