@@ -22,7 +22,11 @@
     border-color: orange;
 }
 
-.center{
+
+/*Alle Klassen, die Zentriert sein sollen*/
+
+.center,
+.inner_c_text{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -131,7 +135,6 @@
 
 .inner_c_text{
     display: inline-block;
-    position: relative;
     width: 100%;
 }
 
